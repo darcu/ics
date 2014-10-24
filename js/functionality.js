@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			for (var j = 0, n = items.length; j < n; j++) {
 				Utils.hasClass(items[j], 'selected') && Utils.removeClasses(items[j], 'selected', false);
 			}
-			window.scrollTo(0,  e.currentTarget.offsetTop + e.currentTarget.offsetHeight);
+			//window.scrollTo(e.currentTarget.offsetTop + e.currentTarget.offsetHeight, e.currentTarget.offsetTop + e.currentTarget.offsetHeight);
 			Utils.addClasses(e.currentTarget, 'selected');
 		});
 	}
