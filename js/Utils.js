@@ -22,3 +22,53 @@ Utils.createDom = function(obj) {
 	container.appendChild(domElem);
 	return domElem;
 };
+
+Utils.removeClasses = function(node, aClass) {
+	if (!node) {
+		return;
+	}
+
+	(typeof aClass === 'string') && (aClass = [aClass]);
+	aClass.forEach(function(c) {
+		var rgx = new RegExp('\\b' + c + '\\b');
+		node.className = node.className.replace(rgx, "");
+		node.className = node.className.trim();
+	});
+};
+
+Utils.addClasses = function(node, aClass) {
+	if (!node) {
+		return;
+	}
+
+	(typeof aClass === 'string') && (aClass = [aClass]);
+	aClass.forEach(function(c) {
+		if (node.className.indexOf(c) === -1) {
+			node.className += ' ' + c;
+			node.className = node.className.trim();
+		}
+	});
+};
+
+Utils.addRemoveClasses = function(node, aClass, toggle) {
+	toggle ? Utils.addClasses(node, aClass) : Utils.removeClasses(node, aClass);
+};
+
+Utils.hasClass = function(node, aClass) {
+	return node && node.className.indexOf(aClass) > -1;
+};
+
+Utils.toggleClass = function(node, aClass) {
+	if (!node) {
+		return;
+	}
+
+	(typeof aClass === 'string') && (aClass = [aClass]);
+	aClass.forEach(function(c) {
+		if (Utils.hasClass(node, c)) {
+			Utils.removeClasses(node, [c]);
+		} else {
+			Utils.addClasses(node, [c]);
+		}
+	});
+};
