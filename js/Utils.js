@@ -8,7 +8,7 @@ Utils.createDom = function(obj) {
 		events: obj['events'] || {}
 	};
 	var domElem = document.createElement(args['type']);
-	
+
 	for (var i in args.attributes) {
 		args.attributes.hasOwnProperty(i) && domElem.setAttribute(i, args.attributes[i]);
 	}
@@ -17,7 +17,7 @@ Utils.createDom = function(obj) {
 	}
 	var container = document.createDocumentFragment();
 	for (var i = 0, n = args.content.length; i < n; i += 1) {
-		args.content[i] && container.appendChild( typeof args.content[i] == "string" || typeof args.content[i] == "number" ? document.createTextNode(args.content[i]) : args.content[i]);
+		args.content[i] && container.appendChild(typeof args.content[i] == "string" || typeof args.content[i] == "number" ? document.createTextNode(args.content[i]) : args.content[i]);
 	}
 	container.appendChild(domElem);
 	return domElem;
