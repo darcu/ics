@@ -1,6 +1,7 @@
 /* General Style  */
 * {
   -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 html,
@@ -406,21 +407,34 @@ select {
   margin-top: -25px;
   margin-left: -25px;
   font-family: 'ics';
-  font-size: 25px;
+  font-size: 50px;
+  color: #fff;
 }
 .grid .item .box.photo {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
+.grid .item .box.photo .overlay:before {
+  content: "\e60f";
+}
 .grid .item .box.download {
   background-color: #FF530D;
+}
+.grid .item .box.download .overlay:before {
+  content: "\e613";
 }
 .grid .item .box.video {
   background-color: #FFD01E;
 }
+.grid .item .box.video .overlay:before {
+  content: "\e606";
+}
 .grid .item .box.mp3 {
   background-color: #42FF27;
+}
+.grid .item .box.mp3 .overlay:before {
+  content: "\e603";
 }
 .grid .item .box:hover .overlay {
   top: 0;
@@ -428,4 +442,22 @@ select {
   -moz-transition: top 0.25s ease;
   -o-transition: top 0.25s ease;
   transition: top 0.25s ease;
+}
+@media screen and (max-width: 1024px) {
+  .grid .item {
+    width: 25%;
+    height: calc(25vw);
+  }
+}
+@media screen and (max-width: 768px) {
+  .grid .item {
+    width: 33.33333%;
+    height: calc(33.333333333333336vw);
+  }
+}
+@media screen and (max-width: 480px) {
+  .grid .item {
+    width: 50%;
+    height: calc(50vw);
+  }
 }

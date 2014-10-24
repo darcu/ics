@@ -39,22 +39,43 @@
 					margin-left: -25px;
 
 					font-family: 'ics';
-					font-size: 25px;
+					font-size: 50px;
+					color: #fff;
 				}
 			}
 			&.photo{
 				background-size: cover;
 				background-repeat: no-repeat;
 				background-position: center;
+				.overlay{
+					&:before{
+						content: "\e60f";
+					}
+				}
 			}
 			&.download{
 				background-color: #FF530D;
+				.overlay{
+					&:before{
+						content: "\e613";
+					}
+				}
 			}
 			&.video{
 				background-color: #FFD01E;
+				.overlay{
+					&:before{
+						content: "\e606";
+					}
+				}
 			}
 			&.mp3{
 				background-color: #42FF27;
+				.overlay{
+					&:before{
+						content: "\e603";
+					}
+				}
 			}	
 			&:hover{
 				.overlay{
@@ -62,6 +83,33 @@
 					.transition(top 0.25s ease);
 				}
 			}
+		}
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	.grid{
+		.item{
+			width: 25%;
+			height: calc(100vw / 4);
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.grid{
+		.item{
+			width: 33.33333%;
+			height: calc(100vw / 3);
+		}
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.grid{
+		.item{
+			width: 50%;
+			height: calc(100vw / 2);
 		}
 	}
 }
