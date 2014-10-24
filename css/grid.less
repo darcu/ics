@@ -1,5 +1,8 @@
 .grid{
 	list-style: none;
+
+	color: #fff;
+	font-family: 'Abel';
 	.item{
 		position: relative;
 		float: left;
@@ -33,14 +36,42 @@
 					top: 50%;
 					left: 50%;
 
-					width: 50px;
-					height: 50px;
-					margin-top: -25px;
-					margin-left: -25px;
+					width: 60px;
+					height: 60px;
+					margin-top: -30px;
+					margin-left: -30px;
 
 					font-family: 'ics';
-					font-size: 50px;
+					font-size: 40px;
+					line-height: 60px;
+					text-align: center;
 					color: #fff;
+
+					background-color: rgba(0, 0, 0, 0.25);
+					.border-radius(15px);
+				}
+			}
+			.details{ // details for files
+				position: absolute;
+				bottom: 0;
+				left: 0;
+
+				width: 100%;
+
+				padding: 0 10px;
+				.title{ // titles of files
+					width: 100%;
+					
+					padding: 0 0 15px 0;
+
+					font-size: 26px;
+					text-align: center;
+				}
+				.size{
+					padding: 0 0 10px;
+					
+					font-size: 20px;
+					text-align: center;
 				}
 			}
 			&.photo{
