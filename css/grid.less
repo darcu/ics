@@ -8,7 +8,7 @@
 		float: left;
 
 		width: 20%;
-		height: calc(100vw / 5); // css feature, basically we give to height same value as width
+		height: calc(100vw / 5); // css feature, basically we give to height same value as width 
 		padding: 2px;
 
 		cursor: pointer;
@@ -115,6 +115,26 @@
 				}
 			}
 		}
+
+		&.selected{ // when this class is activated 
+			clear: both;
+			float: none;
+
+			width: 100%;
+			height: 100vh;
+
+			padding: 20px;
+
+			.transition(all 0.3s ease);
+			.box{
+				.overlay{
+					display: none;
+				}
+				&.photo{
+					background-size: contain;
+				}
+			}
+		}
 	}
 }
 
@@ -122,7 +142,7 @@
 	.grid{
 		.item{
 			width: 25%;
-			height: calc(100vw / 4);
+			height: calc(100vw / 4); // to show 4 items per row
 		}
 	}
 }
@@ -131,7 +151,7 @@
 	.grid{
 		.item{
 			width: 33.33333%;
-			height: calc(100vw / 3);
+			height: calc(100vw / 3); // to show 3 items per row
 		}
 	}
 }
@@ -140,7 +160,7 @@
 	.grid{
 		.item{
 			width: 50%;
-			height: calc(100vw / 2);
+			height: calc(100vw / 2); // to show 2 items per row
 		}
 	}
 }
