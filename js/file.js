@@ -27,7 +27,7 @@ function Draw(f) {
 	var item = document.createElement('li');
 
 	item.className = 'item';
-	item.innerHTML = '<div class="box photo" style="background-image: url(' + url + ');"></div>';
+	item.innerHTML = '<div class="box photo" style="background-image: url(' + url + ');"><div class="overlay"></div></div>';
 	document.getElementById('list').insertBefore(item, null);
 }
 
