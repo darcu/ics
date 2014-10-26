@@ -1,3 +1,4 @@
+// this is the generic Item metadata holder
 var Item = function(file) {
 	this.file = file;
 	this.name = file.name;
@@ -5,45 +6,13 @@ var Item = function(file) {
 	this.type = file.type;
 };
 
+// this is the generic UI Item holder
+// it holds a reference to the DOM element 
 var UiItem = function(f) {
 	// is the current element selected or not
 	var isSelected = false;
 	var deselListener;
-	// var imgSize = {
-	// 	'h': 0,
-	// 	'w': 0,
-	// 	'aspect': 0
-	// };
-
-	// var calcImgHeight = function() {
-	// 	console.log('calc');
-	// 	console.log(item.offsetHeight);
-	// 	console.log(item.offsetWidth);
-
-
-	// 	// var vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-	// 	// var vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-	// 	var iw = item.offsetWidth;
-	// 	var ih = item.offsetHeight;
-
-	// 	// FIXME TODO get an actual reference to the img dom object, don't do a query every time
-	// 	var img = item.getElementsByTagName('img')[0];
-
-	// 	if (imgSize.w < iw) {
-	// 		if (imgSize.h < ih) {
-	// 			img.style.width = imgSize.w + 'px';
-	// 			img.style.height = (imgSize.w / imgSize.aspect) + 'px';
-	// 		} else {
-	// 			img.style.height = ih + 'px';
-	// 			img.style.width = (ih * imgSize.aspect) + 'px';
-	// 		}
-	// 	} else {
-	// 		// img.style.width = iw + 'px';
-	// 	}
-
-
-	// 	// img.style.height = (imgSize.h < vh ? imgSize.h : vh) + 'px';
-	// };
+	var item;
 
 	var select = function() {
 		// first trigger the global select event to deselect all other elements
@@ -52,45 +21,41 @@ var UiItem = function(f) {
 		// set this element to selected and add the class
 		isSelected = true;
 		Dom.addClasses(item, 'selected');
-
-		// calcImgHeight();
-		// window.addEventListener('resize', calcImgHeight, false);
 	};
 
 	var deselect = function() {
-		// set this element to deselected and remove the class
-		isSelected = false;
-		Dom.removeClasses(item, 'selected');
-		// window.removeEventListener('resize', calcImgHeight, false);
+		if (isSelected) {
+			// set this element to deselected and remove the class
+			isSelected = false;
+			Dom.removeClasses(item, 'selected');
+		}
 	};
 
 	var toggle = function() {
+		console.log('toggle ' + isSelected);
 		isSelected ? deselect() : select();
 	};
 	// listener to deselect element if another is selected
 	deselListener = Event.add('select', 'done', deselect);
 
+	item = createItemDom(f, toggle);
+	this.dom = item;
+};
+
+function createItemDom(f, callback) {
 	// here we assign a blobURL for the current file
 	var urlObj = URL || window.URL || webkitURL || window.webkitURL;
 	var url = urlObj.createObjectURL(f);
-
-	// var img = new Image();
-	// img.onload = function() {
-	// 	imgSize.w = this.width;
-	// 	imgSize.h = this.height;
-	// 	imgSize.aspect = (this.width * 100 / this.height) / 100;
-	// }
-	// img.src = url;
 
 	// now, we create the dom element and assign it its properties
 	var item = document.createElement('li');
 	item.className = 'item';
 	item.innerHTML = '<div class="box photo" style="background-image: url(' + url + ');"><div class="overlay"></div></div>';
 	// item.innerHTML = '<img class="box photo" src="' + url + '"><div class="overlay"></div>';
-	item.addEventListener('click', toggle);
+	item.addEventListener('click', callback);
 
-	this.dom = item;
-};
+	return item;
+}
 
 var boxes = (function() {
 	var boxes = {};
