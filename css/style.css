@@ -158,6 +158,7 @@ input,
 select {
   vertical-align: middle;
 }
+/*  Colors  */
 /* General Style  */
 * {
   -webkit-box-sizing: border-box;
@@ -389,12 +390,17 @@ body .content {
   padding: 2px;
   cursor: pointer;
   overflow: hidden;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 .grid .item .box {
   display: block;
   position: relative;
   width: 100%;
   height: 100%;
+  background-color: #ff530d;
   overflow: hidden;
 }
 .grid .item .box .details {
@@ -421,13 +427,13 @@ body .content {
   background-position: center;
 }
 .grid .item .box.download {
-  background-color: #FF530D;
+  background-color: #ff530d;
 }
 .grid .item .box.video {
-  background-color: #FFD01E;
+  background-color: #ffd01e;
 }
 .grid .item .box.mp3 {
-  background-color: #42FF27;
+  background-color: #42ff27;
 }
 .grid .item .overlay {
   position: absolute;
