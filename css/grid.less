@@ -14,15 +14,15 @@
 		cursor: pointer;
 		overflow: hidden;
 		
+		.transition(all 0.3s ease);
 		.box{ // common style fox any type of box 
 			display: block;
 			position:  relative;
 
 			width: 100%;
 			height: 100%;
-
-			overflow: hidden;
 			
+			overflow: hidden;
 			.details{ // details for files
 				position: absolute;
 				bottom: 0;
@@ -52,13 +52,13 @@
 				background-position: center;
 			}
 			&.download{
-				background-color: #FF530D;
+				background-color: @download-color;
 			}
 			&.video{
-				background-color: #FFD01E;
+				background-color: @video-color;
 			}
 			&.mp3{
-				background-color: #42FF27;
+				background-color: @music-color;
 			}	
 		}
 		.overlay{
