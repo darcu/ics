@@ -459,7 +459,7 @@ body .content {
   clear: both;
   float: none;
   width: 100%;
-  height: auto;
+  height: 100vh;
   padding: 10px;
   background-color: #393939;
   -webkit-transition: all 0.3s ease;
