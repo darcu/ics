@@ -31,7 +31,7 @@ var Event = (function() {
 
 	// remove an event by id
 	ev.remove = function(id) {
-		ids.id && ids.id.ev.splice(ids.id.index, 1);
+		ids[id] && ids[id].ev.splice(ids[id].index, 1);
 	};
 
 	// trigger an event of 'type' and 'phase' with optional 'arguments'
