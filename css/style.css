@@ -400,7 +400,6 @@ body .content {
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: #ff530d;
   overflow: hidden;
 }
 .grid .item .box .details {
@@ -522,7 +521,7 @@ body .content {
 @media screen and (max-width: 768px) {
   .grid .item {
     width: 33.33333%;
-    height: calc(33.333333333333336vw);
+    height: calc(33.33333333vw);
   }
 }
 @media screen and (max-width: 480px) {
