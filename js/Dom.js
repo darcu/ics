@@ -6,7 +6,7 @@ Dom.createDom = function(obj) {
 	var args = {
 		type: obj['type'] || null,
 		attributes: obj['attributes'] || null,
-		content: obj['content'] ? (obj['content'].isArray ? obj['content'] : [obj['content']]) : [],
+		content: obj['content'] ? (Array.isArray(obj['content']) ? obj['content'] : [obj['content']]) : [],
 		events: obj['events'] || {}
 	};
 	var domElem = document.createElement(args['type']);
@@ -21,7 +21,7 @@ Dom.createDom = function(obj) {
 	for (var i = 0, n = args.content.length; i < n; i += 1) {
 		args.content[i] && container.appendChild(typeof args.content[i] == "string" || typeof args.content[i] == "number" ? document.createTextNode(args.content[i]) : args.content[i]);
 	}
-	container.appendChild(domElem);
+	domElem.appendChild(container);
 	return domElem;
 };
 
