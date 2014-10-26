@@ -477,9 +477,8 @@ body .content {
 .grid .item.selected {
   clear: both;
   float: none;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  padding: 10px;
   background-color: #393939;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
