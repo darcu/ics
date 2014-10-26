@@ -20,3 +20,17 @@ function calcImgHeight(url, callback) {
 	}
 	img.src = url;
 }
+
+function getMimeFromExt(ext) {
+	var type = '';
+	var mime = mimes[ext];
+
+	if (mime) {
+		mime.indexOf('image') !== -1 && (type = 'image');
+		mime.indexOf('video') !== -1 && (type = 'video');
+		mime.indexOf('audio') !== -1 && (type = 'audio');
+		mime.indexOf('text') !== -1 && (type = 'text');
+	}
+
+	return type;
+}

@@ -4,7 +4,9 @@ function createItemDom(i, clickHandler) {
 	item.className = 'item';
 	item.addEventListener('click', clickHandler);
 
-	if (i.type === 'image/jpeg') {
+	var type = getMimeFromExt(i.name.substring(i.name.lastIndexOf('.') + 1));
+
+	if (type === 'image') {
 		// item.innerHTML = '<div class="box photo" style="background-image: url(' + url + ');"><div class="overlay"></div></div>';
 		item.innerHTML = '<div class="box photo"><img src="' + i.url + '"><div class="overlay"></div></div>';
 	} else {
