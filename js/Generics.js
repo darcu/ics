@@ -5,6 +5,7 @@ var Item = function(file) {
 	this.name = file.name;
 	this.size = file.size;
 	this.type = file.type;
+	this.mime = getMimeFromExt(file.name.substring(file.name.lastIndexOf('.') + 1));
 };
 
 // this is the generic UI Item holder
@@ -44,12 +45,11 @@ var UiItem = function(i) {
 
 	// listener to deselect element if another is selected
 	deselListener = Event.add('select', 'done', deselect);
-
 	item = createItemDom(i, toggle);
-
-	calcImgHeight(i.url, function(aspect) {
+	(i.mime === 'image') && calcImgHeight(i.url, function(aspect) {
 		var className = (aspect >= 1 ? 'hor' : 'vert');
 		Dom.addClasses(item.getElementsByTagName('img')[0], className);
 	});
+	
 	this.dom = item;
 };

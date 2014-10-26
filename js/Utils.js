@@ -13,10 +13,35 @@ function urlFromFile(f) {
 
 // we should get this straight from the img element
 function calcImgHeight(url, callback) {
+	// FIXME TODO error
 	var img = new Image();
 	img.onload = function() {
 		var aspect = (this.width * 100 / this.height) / 100;
-		callback(aspect)
+		callback(aspect);
 	}
 	img.src = url;
+}
+
+function getMimeFromExt(ext) {
+	var type = '';
+	var mime = mimes[ext];
+
+	if (mime) {
+		mime.indexOf('image') !== -1 && (type = 'image');
+		mime.indexOf('video') !== -1 && (type = 'video');
+		mime.indexOf('audio') !== -1 && (type = 'audio');
+		mime.indexOf('text') !== -1 && (type = 'text');
+	}
+
+	return type;
+}
+
+function textFromFile(f, callback) {
+	var r = new FileReader();
+	r.onload = function(e) {
+		// FIXME TODO error
+		var text = e.target.result;
+		callback(text);
+	};
+	r.readAsText(f);
 }
