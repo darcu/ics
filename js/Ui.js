@@ -3,16 +3,61 @@ function createItemDom(i, clickHandler) {
 	var item = document.createElement('li');
 	item.className = 'item';
 	item.addEventListener('click', clickHandler);
-
 	if (i.mime === 'image') {
-		// item.innerHTML = '<div class="box photo" style="background-image: url(' + url + ');"><div class="overlay"></div></div>';
-		item.innerHTML = '<div class="box photo"><img src="' + i.url + '"><div class="overlay"></div></div>';
+		var imageDom = Dom.createDom({
+			'type': 'div',
+			'attributes': {
+				'class': isMobile() ? 'box photo mobile': 'box photo'
+			},
+			'content': [
+				Dom.createDom({
+					'type': 'img',
+					'attributes': {
+						'src': i.url
+					}
+				}),
+				Dom.createDom({
+					'type': 'div',
+					'attributes': {
+						'class': 'overlay'
+					}
+				})
+			]
+		});
+		item.appendChild(imageDom);
 	} else if (i.mime === 'text') {
 		textFromFile(i.file, function(text) {
-			item.innerHTML = '<div class="box"><p>' + text + '</p></div>';
+			var textDom = Dom.createDom({
+				'type': 'div',
+				'attributes': {
+					'class': 'box text'
+				},
+				'content': [
+					Dom.createDom({
+						'type': 'p',
+						'content': text
+					})
+				]
+			});
+			item.appendChild(textDom);
 		});
 	} else {
-		item.innerHTML = '<div class="box"><a href="' + i.url + '">' + i.name + '</a></div>';
+		var textDom = Dom.createDom({
+			'type': 'div',
+			'attributes': {
+				'class': 'box download'
+			},
+			'content': [
+				Dom.createDom({
+					'type': 'a',
+					'attributes': {
+						'href': i.url
+					},
+					'content': i.name
+				})
+			]
+		});
+		item.appendChild(textDom);
 	}
 
 	return item;
