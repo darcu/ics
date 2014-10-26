@@ -21,6 +21,7 @@ var UiItem = function(i) {
 		// set this element to selected and add the class
 		isSelected = true;
 		Dom.addClasses(item, 'selected');
+		calcPosition();
 	};
 
 	var deselect = function() {
@@ -34,6 +35,39 @@ var UiItem = function(i) {
 	var toggle = function() {
 		isSelected ? deselect() : select();
 	};
+
+	var calcPosition = function() {
+		var goToPosition = item.offsetTop;
+		smoothScrollTo(goToPosition, 300);
+	};
+
+	var smoothScrollTo = function(target, duration) {
+		var timer,
+			start = Date.now(),
+			factor = 0,
+			offset = window.pageYOffset,
+			delta = target - window.pageYOffset;
+		duration = duration || 1000;
+
+		if (timer) {
+			clearInterval(timer);
+		}
+
+		var step = function() {
+			var y;
+			factor = (Date.now() - start) / duration;
+			if (factor >= 1) {
+				clearInterval(timer);
+				factor = 1;
+			}
+			y = factor * delta + offset;
+			window.scrollBy(0, y - window.pageYOffset);
+		}
+
+		timer = setInterval(step, 10);
+		return timer;
+	};
+
 	// listener to deselect element if another is selected
 	deselListener = Event.add('select', 'done', deselect);
 
@@ -71,7 +105,7 @@ function createItemDom(i, callback) {
 
 			var item = document.createElement('li');
 			item.className = 'item';
-			item.innerHTML = '<div class="box"><a href="' + url + '">' + i .name + '</a></div>';
+			item.innerHTML = '<div class="box"><a href="' + url + '">' + i.name + '</a></div>';
 			item.addEventListener('click', callback);
 
 			return item;
