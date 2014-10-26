@@ -4,11 +4,13 @@ function createItemDom(i, clickHandler) {
 	item.className = 'item';
 	item.addEventListener('click', clickHandler);
 
-	var type = getMimeFromExt(i.name.substring(i.name.lastIndexOf('.') + 1));
-
-	if (type === 'image') {
+	if (i.mime === 'image') {
 		// item.innerHTML = '<div class="box photo" style="background-image: url(' + url + ');"><div class="overlay"></div></div>';
 		item.innerHTML = '<div class="box photo"><img src="' + i.url + '"><div class="overlay"></div></div>';
+	} else if (i.mime === 'text') {
+		textFromFile(i.file, function(text) {
+			item.innerHTML = '<div class="box"><p>' + text + '</p></div>';
+		});
 	} else {
 		item.innerHTML = '<div class="box"><a href="' + i.url + '">' + i.name + '</a></div>';
 	}

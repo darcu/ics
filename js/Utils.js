@@ -13,10 +13,11 @@ function urlFromFile(f) {
 
 // we should get this straight from the img element
 function calcImgHeight(url, callback) {
+	// FIXME TODO error
 	var img = new Image();
 	img.onload = function() {
 		var aspect = (this.width * 100 / this.height) / 100;
-		callback(aspect)
+		callback(aspect);
 	}
 	img.src = url;
 }
@@ -33,4 +34,14 @@ function getMimeFromExt(ext) {
 	}
 
 	return type;
+}
+
+function textFromFile(f, callback) {
+	var r = new FileReader();
+	r.onload = function(e) {
+		// FIXME TODO error
+		var text = e.target.result;
+		callback(text);
+	};
+	r.readAsText(f);
 }
