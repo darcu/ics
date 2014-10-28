@@ -456,6 +456,21 @@ body .content {
 .grid .item .box.mp3 {
   background-color: #42ff27;
 }
+.grid .item .box.text {
+  padding: 10px;
+  background-color: #fff;
+  overflow: hidden;
+}
+.grid .item .box.text p {
+  height: 100%;
+  font-size: 14px;
+  line-height: 21px;
+  color: #888888;
+}
+.grid .item .box.text code {
+  color: #888888;
+  white-space: pre-wrap;
+}
 .grid .item .overlay {
   position: absolute;
   top: 0;
@@ -558,15 +573,6 @@ body .content {
 	}
 }
 
-@media screen and (max-width: 768px) {
-	.grid{
-		.item{
-			width: 33.33333%;
-			height: calc(100vw / 3); // to show 3 items per row
-		}
-	}
-}
-
 @media screen and (max-width: 480px) {
 	.grid{
 		.item{
@@ -575,3 +581,9 @@ body .content {
 		}
 	}
 } */
+@media screen and (max-width: 768px) {
+  .grid .item {
+    width: 50%;
+    height: calc(50vw);
+  }
+}
