@@ -169,7 +169,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  background-color: #898989;
+  background-color: #101a24;
   -webkit-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
@@ -177,13 +177,33 @@ body {
 }
 html .content,
 body .content {
-  width: 100%;
+  width: 1550px;
+  margin: 0 auto;
+}
+/* Media queries */
+@media screen and (max-width: 1600px) {
+  html .content,
+  body .content {
+    width: 1240px;
+  }
+}
+@media screen and (max-width: 1280px) {
+  html .content,
+  body .content {
+    width: 930px;
+  }
+}
+@media screen and (max-width: 960px) {
+  html .content,
+  body .content {
+    width: 620px;
+  }
 }
 /* IMPORTS */
 @font-face {
   font-family: 'ics';
-  src: url('fonts/ics.eot');
-  src: url('fonts/ics.eot') format('embedded-opentype'), url('fonts/ics.woff') format('woff'), url('fonts/ics.ttf') format('truetype'), url('fonts/ics.svg') format('svg');
+  src: url('../fonts/ics.eot');
+  src: url('../fonts/ics.eot') format('embedded-opentype'), url('../fonts/ics.woff') format('woff'), url('../fonts/ics.ttf') format('truetype'), url('../fonts/ics.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -385,8 +405,9 @@ body .content {
 .grid .item {
   position: relative;
   float: left;
-  width: 20%;
-  height: calc(20vw);
+  width: 300px;
+  height: 300px;
+  margin: 0px 5px 10px 5px;
   padding: 2px;
   cursor: pointer;
   overflow: hidden;
@@ -528,21 +549,29 @@ body .content {
   -o-transition-delay: 0.15s;
   transition-delay: 0.15s;
 }
-@media screen and (max-width: 1024px) {
-  .grid .item {
-    width: 25%;
-    height: calc(25vw);
-  }
+/* @media screen and (max-width: 1024px) {
+	.grid{
+		.item{
+			width: 25%;
+			height: calc(100vw / 4); // to show 4 items per row
+		}
+	}
 }
+
 @media screen and (max-width: 768px) {
-  .grid .item {
-    width: 33.33333%;
-    height: calc(33.333333333333336vw);
-  }
+	.grid{
+		.item{
+			width: 33.33333%;
+			height: calc(100vw / 3); // to show 3 items per row
+		}
+	}
 }
+
 @media screen and (max-width: 480px) {
-  .grid .item {
-    width: 50%;
-    height: calc(50vw);
-  }
-}
+	.grid{
+		.item{
+			width: 50%;
+			height: calc(100vw / 2); // to show 2 items per row
+		}
+	}
+} */
