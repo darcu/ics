@@ -79,10 +79,10 @@ var contentOverlay = (function() {
 		//image custom dom
 		this.imageDom = function() {
 			var imageElem = Dom.createDom({
-				'type': 'div',
+				'type': 'img',
 				'attributes': {
-					'class': 'image',
-					'style': 'background-image: url("' + this.file.url + '");'
+					'class': 'photo',
+					'src':  this.file.url
 				}
 			});
 			content.appendChild(imageElem);

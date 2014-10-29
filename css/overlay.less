@@ -1,0 +1,68 @@
+#overlay{
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+
+	background-color: rgba(0, 0, 0, 0.85);
+	overflow: hidden;
+	&.hide{
+		display: none;
+	}
+	.content{
+		position: relative;
+
+		width: 100%;
+		height: 100%;
+		.text{
+			width: 1170px;
+			height: 90vh;
+
+			margin: 30px auto;
+			padding: 10px;
+
+			background-color: #fff;
+			overflow: auto;
+		}
+		.photo{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+
+			max-width: 90vh;
+			max-height: 90vh;
+			
+			border: 10px solid #fff;
+			.border-radius(5px);
+			.transform(translate(-50%, -50%));
+		}
+	}
+	.close{
+		position: absolute;
+		top: 20px;
+		right: 20px;
+
+		width: 30px;
+		height: 30px;
+
+		border: 0px solid transparent;
+		background: transparent;
+		cursor: pointer;
+		&:before{
+			content: '\e614';
+			position: absolute;
+			top: 0;
+			left: 0;
+
+			width: 100%;
+			height: 100%;
+
+			font-family: 'ics';
+			font-size: 30px;
+
+			color: #fff;
+		}
+	}
+}
