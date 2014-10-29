@@ -12,40 +12,42 @@ var Item = function(file) {
 // it holds a reference to the DOM element 
 var UiItem = function(i) {
 	// is the current element selected or not
-	var isSelected = false;
-	var deselListener;
+	// var isSelected = false;
+	// var deselListener;
 	var item;
 
 	var select = function() {
+		contentOverlay.initData(i);
 		// first trigger the global select event to deselect all other elements
-		Event.trigger('select', 'done');
+		//Event.trigger('select', 'done');
 
 		// set this element to selected and add the class
-		isSelected = true;
-		Dom.addClasses(item, 'selected');
-		calcPosition();
+		//isSelected = true;
+		//Dom.addClasses(item, 'selected');
+		//calcPosition();
 	};
 
-	var deselect = function() {
-		if (isSelected) {
-			// set this element to deselected and remove the class
-			isSelected = false;
-			Dom.removeClasses(item, 'selected');
-		}
-	};
+	// var deselect = function() {
+	// 	if (isSelected) {
+	// 		// set this element to deselected and remove the class
+	// 		isSelected = false;
+	// 		Dom.removeClasses(item, 'selected');
+	// 	}
+	// };
 
-	var toggle = function() {
-		isSelected ? deselect() : select();
-	};
+	// var toggle = function() {
+	// 	isSelected ? deselect() : select();
+	// };
 
-	var calcPosition = function() {
-		var goToPosition = item.offsetTop;
-		smoothScrollTo(goToPosition, 300);
-	};
+	// var calcPosition = function() {
+	// 	var goToPosition = item.offsetTop;
+	// 	smoothScrollTo(goToPosition, 300);
+	// };
 
 	// listener to deselect element if another is selected
-	deselListener = Event.add('select', 'done', deselect);
-	item = createItemDom(i, toggle);
+	//deselListener = Event.add('select', 'done', deselect);
+	item = createItemDom(i, select);
+
 	(i.mime === 'image') && calcImgHeight(i.url, function(aspect) {
 		var className = (aspect >= 1 ? 'hor' : 'vert');
 		Dom.addClasses(item.getElementsByTagName('img')[0], className);

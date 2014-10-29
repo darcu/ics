@@ -24,6 +24,7 @@ var initListeners = function() {
 			boxes.push(f);
 		}
 	}, false);
+	// contentOverlay.initData();
 };
 
 initListeners();
