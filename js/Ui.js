@@ -35,7 +35,22 @@ function createItemDom(i, clickHandler) {
 				'content': [
 					Dom.createDom({
 						'type': 'p',
+						'attributes': {
+							'class': 'fullContent'
+						},
 						'content': text
+					}),
+					Dom.createDom({
+						'type': 'div',
+						'attributes' : {
+							'class': 'expand'
+						},
+						'content': [
+							Dom.createDom({
+								'type': 'p',
+								'content': 'View full post'
+							})
+						]
 					})
 				]
 			});

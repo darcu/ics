@@ -24,7 +24,7 @@ function calcImgHeight(url, callback) {
 
 function getMimeFromExt(ext) {
 	var type = '';
-	var mime = mimes[ext];
+	var mime = mimes[ext.toLowerCase()];
 
 	if (mime) {
 		mime.indexOf('image') !== -1 && (type = 'image');
