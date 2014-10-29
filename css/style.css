@@ -208,8 +208,8 @@ body .content {
 /* IMPORTS */
 @font-face {
   font-family: 'ics';
-  src: url('../fonts/ics.eot');
-  src: url('../fonts/ics.eot') format('embedded-opentype'), url('../fonts/ics.woff') format('woff'), url('../fonts/ics.ttf') format('truetype'), url('../fonts/ics.svg') format('svg');
+  src: url('fonts/ics.eot?d9sal2');
+  src: url('fonts/ics.eot?#iefixd9sal2') format('embedded-opentype'), url('fonts/ics.woff?d9sal2') format('woff'), url('fonts/ics.ttf?d9sal2') format('truetype'), url('fonts/ics.svg?d9sal2#ics') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -361,6 +361,9 @@ body .content {
 .icon-volume-decrease:before {
   content: "\e62c";
 }
+.icon-share:before {
+  content: "\e63b";
+}
 .icon-google:before {
   content: "\e62d";
 }
@@ -403,6 +406,30 @@ body .content {
 .icon-vimeo3:before {
   content: "\e63a";
 }
+.icon-arrow-left:before {
+  content: "\e63c";
+}
+.icon-arrow-down:before {
+  content: "\e63d";
+}
+.icon-arrow-up:before {
+  content: "\e63e";
+}
+.icon-arrow-right:before {
+  content: "\e63f";
+}
+.icon-arrow-left2:before {
+  content: "\e640";
+}
+.icon-arrow-down2:before {
+  content: "\e641";
+}
+.icon-arrow-up2:before {
+  content: "\e642";
+}
+.icon-uniE643:before {
+  content: "\e643";
+}
 .grid {
   list-style: none;
   color: #fff;
@@ -414,7 +441,6 @@ body .content {
   width: 300px;
   height: 300px;
   margin: 0px 5px 10px 5px;
-  cursor: pointer;
   overflow: hidden;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
@@ -445,6 +471,9 @@ body .content {
   padding: 0 0 10px;
   font-size: 20px;
   text-align: center;
+}
+.grid .item .box.photo {
+  cursor: pointer;
 }
 .grid .item .box.photo img {
   position: relative;
@@ -492,6 +521,7 @@ body .content {
   width: 100%;
   height: 50px;
   background-color: #2498bf;
+  cursor: pointer;
 }
 .grid .item .box.text .expand:before {
   content: '';
@@ -507,10 +537,22 @@ body .content {
   background-image: linear-gradient(to bottom, rgba(36, 152, 191, 0) 0%, #2498bf 100%);
 }
 .grid .item .box.text .expand p {
+  position: relative;
+  float: left;
   margin-left: 10px;
   font-size: 22px;
   color: #fff;
   line-height: 45px;
+}
+.grid .item .box.text .expand p:after {
+  content: '\e63f';
+  position: absolute;
+  top: 2px;
+  right: -35px;
+  width: 30px;
+  height: 30px;
+  font-family: 'ics';
+  font-size: 25px;
 }
 .grid .item .overlay {
   position: absolute;
