@@ -648,3 +648,28 @@ body .content {
     padding: 2px;
   }
 }
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  overflow: hidden;
+}
+#overlay.hide {
+  display: none;
+}
+#overlay .content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+#overlay .content .text {
+  width: 1170px;
+  height: 90vh;
+  margin: 30px auto;
+  padding: 10px;
+  background-color: #fff;
+  overflow: auto;
+}
