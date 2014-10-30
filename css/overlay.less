@@ -17,14 +17,19 @@
 		width: 100%;
 		height: 100%;
 		.text{
-			width: 1170px;
-			height: 90vh;
+			width: 90%;
+			height: 90%;
+			max-width: 1170px;
 
 			margin: 30px auto;
 			padding: 10px;
 
 			background-color: #fff;
 			overflow: auto;
+			code{
+				color: @text-color;
+				white-space: pre-wrap;
+			}
 		}
 		.photo{
 			position: absolute;
@@ -62,6 +67,29 @@
 			font-size: 30px;
 
 			color: #fff;
+		}
+	}
+}
+@media screen and (max-width: 1024px) {
+	#overlay{
+		.close{
+			top: 5px;
+
+			width: 45px;
+			height: 45px;
+
+			background: #888;
+			.border-radius(50%);
+			&:before{
+				line-height: 45px;
+			}
+		}
+	}
+}
+@media screen and (max-width: 768px) {
+	#overlay{
+		.close{
+			right: 5px;
 		}
 	}
 }

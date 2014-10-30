@@ -1194,12 +1194,17 @@ body .content {
   height: 100%;
 }
 #overlay .content .text {
-  width: 1170px;
-  height: 90vh;
+  width: 90%;
+  height: 90%;
+  max-width: 1170px;
   margin: 30px auto;
   padding: 10px;
   background-color: #fff;
   overflow: auto;
+}
+#overlay .content .text code {
+  color: #888888;
+  white-space: pre-wrap;
 }
 #overlay .content .photo {
   position: absolute;
@@ -1234,4 +1239,26 @@ body .content {
   font-family: 'ics';
   font-size: 30px;
   color: #fff;
+}
+@media screen and (max-width: 1024px) {
+  #overlay .close {
+    top: 5px;
+    width: 45px;
+    height: 45px;
+    background: #888;
+    -webkit-border-radius: 50%;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 50%;
+    -moz-background-clip: padding;
+    border-radius: 50%;
+    background-clip: padding-box;
+  }
+  #overlay .close:before {
+    line-height: 45px;
+  }
+}
+@media screen and (max-width: 768px) {
+  #overlay .close {
+    right: 5px;
+  }
 }
