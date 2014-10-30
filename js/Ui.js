@@ -7,7 +7,7 @@ function createItemDom(i, clickHandler) {
 		var imageDom = Dom.createDom({
 			'type': 'div',
 			'attributes': {
-				'class': isMobile() ? 'box photo mobile': 'box photo'
+				'class': isMobile() ? 'box photo mobile' : 'box photo'
 			},
 			'content': [
 				Dom.createDom({
@@ -42,7 +42,7 @@ function createItemDom(i, clickHandler) {
 					}),
 					Dom.createDom({
 						'type': 'div',
-						'attributes' : {
+						'attributes': {
 							'class': 'expand'
 						},
 						'content': [
@@ -57,22 +57,45 @@ function createItemDom(i, clickHandler) {
 			item.appendChild(textDom);
 		});
 	} else {
-		var textDom = Dom.createDom({
-			'type': 'div',
-			'attributes': {
-				'class': 'box download'
-			},
-			'content': [
-				Dom.createDom({
-					'type': 'a',
-					'attributes': {
-						'href': i.url
-					},
-					'content': i.name
-				})
-			]
-		});
-		item.appendChild(textDom);
+		var ext = getExtFromType(i.type),
+			downloadDom = Dom.createDom({
+				'type': 'div',
+				'attributes': {
+					'class': 'box download ' + ext
+				},
+				'content': [
+					Dom.createDom({
+						'type': 'a',
+						'attributes': {
+							'class': 'downloadButton',
+							'href': i.url
+						}
+					}),
+					Dom.createDom({
+						'type': 'div',
+						'attributes': {
+							'class': 'details'
+						},
+						'content': [
+							Dom.createDom({
+								'type': 'p',
+								'attributes': {
+									'class': 'title'
+								},
+								'content': i.name
+							}),
+							Dom.createDom({
+								'type': 'p',
+								'attributes': {
+									'class': 'size'
+								},
+								'content': bytesToSize(i.size)
+							})
+						]
+					})
+				]
+			});
+		item.appendChild(downloadDom);
 	}
 
 	return item;
