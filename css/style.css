@@ -167,6 +167,13 @@ lesshat-selector {
 @-o-keyframes bounce{ 0%{ -o-transform: scale(1);} 70%{ -o-transform: scale(1.1);} 100%{ -o-transform: scale(1)}}
 @keyframes bounce{ 0%{-webkit-transform: scale(1);-moz-transform: scale(1);-ms-transform: scale(1);transform: scale(1);} 70%{-webkit-transform: scale(1.1);-moz-transform: scale(1.1);-ms-transform: scale(1.1);transform: scale(1.1);} 100%{-webkit-transform: scale(1);-moz-transform: scale(1);-ms-transform: scale(1);transform: scale(1);};
 }
+lesshat-selector {
+  -lh-property: 0; } 
+@-webkit-keyframes fall{ 0%{ top: -100%;} 33%{ top: 100px;} 66%{ top: -100px}  100%{ top: 0;}}
+@-moz-keyframes fall{ 0%{ top: -100%;} 33%{ top: 100px;} 66%{ top: -100px}  100%{ top: 0;}}
+@-o-keyframes fall{ 0%{ top: -100%;} 33%{ top: 100px;} 66%{ top: -100px}  100%{ top: 0;}}
+@keyframes fall{ 0%{ top: -100%;} 33%{ top: 100px;} 66%{ top: -100px}  100%{ top: 0;};
+}
 /* General Style  */
 * {
   -webkit-box-sizing: border-box;
@@ -1243,6 +1250,10 @@ body .content {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.85);
   overflow: hidden;
+  -webkit-animation: fall 0.4s linear;
+  -moz-animation: fall 0.4s linear;
+  -o-animation: fall 0.4s linear;
+  animation: fall 0.4s linear;
 }
 #overlay.hide {
   display: none;
