@@ -71,6 +71,11 @@
 					font-size: 100px;
 					color: #fff;
 				}
+				&:hover{
+					&:before{
+						.animation(bounce 1s ease infinite);
+					}
+				}
 			}
 			&.photo{
 				cursor: pointer;
@@ -93,6 +98,30 @@
 					.downloadButton{
 						&:before{
 							content: '\e6bc';
+						}
+					}
+				}
+				&.rar{
+					background-color: @rar-color;
+					.downloadButton{
+						&:before{
+							content: '\e6c9';
+						}
+					}
+				}
+				&.zip{
+					background-color: @zip-color;
+					.downloadButton{
+						&:before{
+							content: '\e6f3';
+						}
+					}
+				}
+				&.exe, &.msi{
+					background-color: @exe-color;
+					.downloadButton{
+						&:before{
+							content: '\e679';
 						}
 					}
 				}
