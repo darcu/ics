@@ -677,8 +677,8 @@ body .content {
   position: absolute;
   top: 50%;
   left: 50%;
-  max-width: 90vh;
-  max-height: 90vh;
+  max-width: 90%;
+  max-height: 90%;
   border: 10px solid #fff;
   -webkit-border-radius: 5px;
   -webkit-background-clip: padding-box;
