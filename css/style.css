@@ -1009,7 +1009,7 @@ body .content {
   left: 50%;
   width: 100px;
   height: 100px;
-  margin-top: 30px;
+  margin-top: 50px;
   cursor: pointer;
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
@@ -1185,6 +1185,23 @@ body .content {
     height: calc(50vw);
     margin: 0;
     padding: 2px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .grid .item .box .details .title {
+    padding: 0 0 10px 0;
+    font-size: 20px;
+  }
+  .grid .item .box .details .size {
+    font-size: 16px;
+  }
+  .grid .item .box .downloadButton {
+    width: 70px;
+    height: 70px;
+    margin-top: 15px;
+  }
+  .grid .item .box .downloadButton:before {
+    font-size: 70px;
   }
 }
 #overlay {

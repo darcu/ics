@@ -217,7 +217,6 @@
 		}
 	}
 }
-
 @media screen and (max-width: 768px) {
 	.grid{
 		.item{
@@ -226,12 +225,31 @@
 
 			margin: 0;
 			padding: 2px;
+		}
+	}
+}
+@media screen and (max-width: 480px) {
+	.grid{
+		.item{
 			.box{
 				.details{
-					
+					.title{
+						padding: 0 0 10px 0;
+
+						font-size: 20px;
+					}
+					.size{
+						font-size: 16px;
+					}
 				}
 				.downloadButton{
+					width: 70px;
+					height: 70px;
 
+					margin-top: 15px;
+					&:before{
+						font-size: 70px;
+					}
 				}
 			}
 		}
