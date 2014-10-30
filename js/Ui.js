@@ -1,8 +1,8 @@
-function createItemDom(i, clickHandler) {
+function createItemDom(i) {
 	// now, we create the dom element and assign it its properties
 	var item = document.createElement('li');
 	item.className = 'item';
-	item.addEventListener('click', clickHandler);
+
 	if (i.mime === 'image') {
 		var imageDom = Dom.createDom({
 			'type': 'div',
@@ -22,38 +22,51 @@ function createItemDom(i, clickHandler) {
 						'class': 'overlay'
 					}
 				})
-			]
+			],
+			'events': {
+				'click': function(e) {
+					contentOverlay.initData(i);
+					return false;
+				}
+			}
 		});
 		item.appendChild(imageDom);
 	} else if (i.mime === 'text') {
 		textFromFile(i.file, function(text) {
-			var textDom = Dom.createDom({
-				'type': 'div',
-				'attributes': {
-					'class': 'box text'
-				},
-				'content': [
-					Dom.createDom({
-						'type': 'p',
-						'attributes': {
-							'class': 'fullContent'
-						},
-						'content': text
-					}),
-					Dom.createDom({
-						'type': 'div',
-						'attributes': {
-							'class': 'expand'
-						},
-						'content': [
-							Dom.createDom({
-								'type': 'p',
-								'content': 'View full post'
-							})
-						]
-					})
-				]
-			});
+			var codeExt = ['css', 'html'],
+				textDom = Dom.createDom({
+					'type': 'div',
+					'attributes': {
+						'class': 'box text'
+					},
+					'content': [
+						Dom.createDom({
+							'type': codeExt.indexOf(getExtFromType(i.type)) !== -1 ? 'code' : 'p',
+							'attributes': {
+								'class': 'fullContent'
+							},
+							'content': text
+						}),
+						Dom.createDom({
+							'type': 'div',
+							'attributes': {
+								'class': 'expand'
+							},
+							'content': [
+								Dom.createDom({
+									'type': 'p',
+									'content': 'View full post'
+								})
+							],
+							'events': {
+								'click': function(e) {
+									contentOverlay.initData(i);
+									return false;
+								}
+							}
+						})
+					]
+				});
 			item.appendChild(textDom);
 		});
 	} else {

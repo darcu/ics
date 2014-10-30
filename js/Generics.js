@@ -16,8 +16,8 @@ var UiItem = function(i) {
 	// var deselListener;
 	var item;
 
-	var select = function() {
-		contentOverlay.initData(i);
+	//var select = function() {
+		
 		// first trigger the global select event to deselect all other elements
 		//Event.trigger('select', 'done');
 
@@ -25,7 +25,7 @@ var UiItem = function(i) {
 		//isSelected = true;
 		//Dom.addClasses(item, 'selected');
 		//calcPosition();
-	};
+	//};
 
 	// var deselect = function() {
 	// 	if (isSelected) {
@@ -46,7 +46,7 @@ var UiItem = function(i) {
 
 	// listener to deselect element if another is selected
 	//deselListener = Event.add('select', 'done', deselect);
-	item = createItemDom(i, select);
+	item = createItemDom(i);
 
 	(i.mime === 'image') && calcImgHeight(i.url, function(aspect) {
 		var className = (aspect >= 1 ? 'hor' : 'vert');

@@ -20,17 +20,17 @@ var contentOverlay = (function() {
 				'type': 'div',
 				'attributes': {
 					'class': 'content'
+				},
+				'events': {
+					'click': function(e) {
+						e.stopPropagation();
+					}
 				}
 			}),
 			Dom.createDom({
 				'type': 'button',
 				'attributes': {
 					'class': 'close'
-				},
-				'events': {
-					'click': function(e) {
-						Dom.addClasses(mainElement, 'hide');
-					}
 				}
 			})
 		],
@@ -44,10 +44,10 @@ var contentOverlay = (function() {
 
 
 	var init = function() {
-		this.file = {};
+		this.data = {};
 
 		this.initData = function(args) {
-			this.file = args;
+			this.data = args;
 
 			Dom.removeClasses(mainElement, 'hide');
 
@@ -63,7 +63,7 @@ var contentOverlay = (function() {
 
 		//check for mime and build custom dom for each type
 		this.checkMime = function() {
-			switch (this.file.mime) {
+			switch (this.data.mime) {
 				case 'image':
 					this.imageDom();
 					return;
@@ -82,7 +82,7 @@ var contentOverlay = (function() {
 				'type': 'img',
 				'attributes': {
 					'class': 'photo',
-					'src':  this.file.url
+					'src': this.data.url
 				}
 			});
 			content.appendChild(imageElem);
@@ -90,21 +90,27 @@ var contentOverlay = (function() {
 
 		//text custom dom
 		this.textDom = function() {
-			textFromFile(this.file.file, function(text) {
-				var textElem = Dom.createDom({
-					'type': 'div',
-					'attributes': {
-						'class': 'text'
-					},
-					'content': text
-				});
+			textFromFile(this.data.file, function(text) {
+				var codeExt = ['css', 'html'],
+					textElem = Dom.createDom({
+						'type': 'div',
+						'attributes': {
+							'class': 'text'
+						},
+						'content': [
+							Dom.createDom({
+								'type': codeExt.indexOf(getExtFromType(this.data.file.type)) !== -1 ? 'code' : 'p',
+								'content': text
+							})
+						]
+					});
 				content.appendChild(textElem);
-			});
+			}.bind(this));
 		};
 
 		//default file dom
 		this.defaultDom = function() {
-			textFromFile(this.file.file, function(text) {
+			textFromFile(this.data.file, function(text) {
 				var defaultDom = Dom.createDom({
 					'type': 'div',
 					'attributes': {
