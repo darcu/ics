@@ -159,6 +159,9 @@ select {
   vertical-align: middle;
 }
 /*  Colors  */
+/* Files type colors */
+/*@rar-color: ;
+*/
 /* General Style  */
 * {
   -webkit-box-sizing: border-box;
@@ -1000,6 +1003,31 @@ body .content {
   font-size: 20px;
   text-align: center;
 }
+.grid .item .box .downloadButton {
+  display: block;
+  position: relative;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin-top: 30px;
+  cursor: pointer;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.grid .item .box .downloadButton:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'ics';
+  font-size: 100px;
+  color: #fff;
+}
 .grid .item .box.photo {
   cursor: pointer;
 }
@@ -1020,6 +1048,12 @@ body .content {
 }
 .grid .item .box.download {
   background-color: #ff530d;
+}
+.grid .item .box.download.pdf {
+  background-color: #c11e07;
+}
+.grid .item .box.download.pdf .downloadButton:before {
+  content: '\e6bc';
 }
 .grid .item .box.video {
   background-color: #ffd01e;
@@ -1122,35 +1156,6 @@ body .content {
   -moz-background-clip: padding;
   border-radius: 15px;
   background-clip: padding-box;
-}
-.grid .item.selected {
-  width: 100%;
-  height: auto;
-  max-height: 100vh;
-  padding: 15px;
-  background-color: #393939;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
-.grid .item.selected .box .overlay {
-  display: none;
-}
-.grid .item.selected .box.photo {
-  margin: 0 auto;
-}
-.grid .item.selected .box.photo img {
-  max-width: 100%;
-  max-height: 100%;
-}
-.grid .item.selected .box.photo .hor {
-  height: auto;
-  max-height: 95vh;
-}
-.grid .item.selected .box.photo .vert {
-  width: auto;
-  max-height: 90vh;
 }
 .grid .item:hover .overlay {
   zoom: 1;
