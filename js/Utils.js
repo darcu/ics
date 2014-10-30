@@ -36,6 +36,10 @@ function getMimeFromExt(ext) {
 	return type;
 }
 
+function getExtFromType(type) {
+	return type.split('/')[1];
+}
+
 function textFromFile(f, callback) {
 	var r = new FileReader();
 	r.onload = function(e) {
@@ -46,6 +50,13 @@ function textFromFile(f, callback) {
 	r.readAsText(f);
 }
 
-function isMobile(){
+function isMobile() {
 	return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
 }
+
+function bytesToSize(bytes) {
+	var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+	if (bytes == 0) return '0 Byte';
+	var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+	return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+};
