@@ -16,10 +16,46 @@ html, body{
 
 	.transition(all 0.2s ease);
 	.content{
-		width: 100%;
+		width: 1550px;
+		margin: 0 auto;
 	}
+}
+
+/* Media queries */
+
+@media screen and (max-width: 1600px) {
+	html,body{
+		.content{
+			width: 1240px;
+		}
+	}
+}
+@media screen and (max-width: 1280px) {
+	html,body{
+		.content{
+			width: 930px;
+		}
+	}
+}
+@media screen and (max-width: 960px) {
+	html,body{
+		.content{
+			width: 620px;
+		}
+	}
+}
+@media screen and (max-width: 768px) {
+	html,body{
+		.content{
+			width: 100%;
+		}
+	}
+}
+@media screen and (max-width: 760px) {
+	
 }
 
 /* IMPORTS */
 @import url("fonts.less");
 @import url("grid.less");
+@import url("overlay.less");
