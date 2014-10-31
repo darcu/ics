@@ -31,6 +31,30 @@ function textFromFile(f, callback) {
 	r.readAsText(f);
 }
 
+/*** net operations ***/
+
+function getRemoteFileFromUrl(url, callback) {
+	function onError() {
+		callback && callback(null);
+	}
+
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', url, true);
+	xhr.responseType = 'blob';
+	xhr.addEventListener('load', function(e) {
+		if (xhr.status !== 200) {
+			onError();
+		} else {
+			var blob = new Blob([xhr.response], {
+				type: 'text/plain'
+			});
+			callback && callback(blob);
+		}
+	}, false);
+	xhr.addEventListener('error', onError, false);
+	xhr.send();
+}
+
 /*** browser checks ***/
 
 function isMobile() {
@@ -40,12 +64,16 @@ function isMobile() {
 /*** generics ***/
 
 function bytesToSize(val) {
+	if (!val) {
+		return 'unknown';
+	}
+
 	var sufix = [' Bytes', ' KB', ' MB', ' GB', ' TB'];
 	var size = val;
 	var i = 0;
 
 	// 1000 ca folosim sistemu metric
-	while(size/1000 > 1) {
+	while (size / 1000 > 1) {
 		i++;
 		size /= 1000;
 	}
@@ -55,6 +83,24 @@ function bytesToSize(val) {
 function genRandomString() {
 	var sid = 1840724046193;
 	return Math.floor(Math.random() * sid).toString(36) + Math.abs(Math.floor(Math.random() * sid) ^ Date.now()).toString(36);
+}
+
+/*** strings ***/
+
+function nameFromString(str) {
+	var start = 0;
+	var end = str.length - 1;
+	str.lastIndexOf('/') !== -1 && (start = str.lastIndexOf('/') + 1);
+	str.lastIndexOf('.') !== -1 && (end = str.lastIndexOf('.'));
+	
+	return str.substring(start, end);
+}
+
+function extFromString(str) {
+	var start = str.length - 1;
+	str.lastIndexOf('.') !== -1 && (start = str.lastIndexOf('.') + 1);
+
+	return str.substring(start);
 }
 
 /*** supported mime types ***/

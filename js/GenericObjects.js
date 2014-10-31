@@ -1,12 +1,36 @@
 // this is the generic Item metadata holder
-var Item = function(file) {
-	this.file = file;
-	this.url = urlFromFile(file);
-	this.name = file.name.lastIndexOf('.') !== -1 ? file.name.substring(0, file.name.lastIndexOf('.')) : file.name;
-	this.ext = file.name.lastIndexOf('.') !== -1 ? file.name.substring(file.name.lastIndexOf('.') + 1) : '';
-	this.size = file.size;
-	this.type = file.type;
-	this.mime = getMimeFromExt(this.ext);
+var Item = function() {
+	var obj = {};
+
+	var init = function(file, url) {
+		obj.file = file;
+		obj.url = url || (file && urlFromFile(file)) || '';
+		obj.name = nameFromString((file && file.name) || url);
+		obj.ext = extFromString((file && file.name) || url);
+		obj.size = file ? file.size : 0;
+		obj.type = file ? file.type : '';
+		obj.mime = getMimeFromExt(obj.ext);
+	};
+
+	obj.initFromUrl = function(url, callback) {
+		var mime = getMimeFromExt(extFromString(url));
+
+		if (mime === 'image' || mime === 'text' || mime === 'code') {
+			getRemoteFileFromUrl(url, function(blob) {
+				init(blob, url);
+				callback && callback();
+			})
+		} else {
+			init(null, url);
+			callback && callback();
+		}
+	};
+
+	obj.init = function(file) {
+		init(file);
+	}
+
+	return obj;
 };
 
 // this is the generic UI Item holder
@@ -20,6 +44,6 @@ var UiItem = function(i) {
 		var className = (aspect >= 1 ? 'hor' : 'vert');
 		addClasses(item.getElementsByTagName('img')[0], className);
 	});
-	
+
 	this.dom = item;
 };
