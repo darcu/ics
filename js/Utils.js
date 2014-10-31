@@ -18,22 +18,12 @@ function calcImgHeight(url, callback) {
 	img.onload = function() {
 		var aspect = (this.width * 100 / this.height) / 100;
 		callback(aspect);
-	}
+	};
 	img.src = url;
 }
 
 function getMimeFromExt(ext) {
-	var type = '';
-	var mime = mimes[ext.toLowerCase()];
-
-	if (mime) {
-		mime.indexOf('image') !== -1 && (type = 'image');
-		mime.indexOf('video') !== -1 && (type = 'video');
-		mime.indexOf('audio') !== -1 && (type = 'audio');
-		mime.indexOf('text') !== -1 && (type = 'text');
-	}
-
-	return type;
+	return mimez[ext.toLowerCase()];
 }
 
 function getExtFromType(type) {
@@ -51,12 +41,18 @@ function textFromFile(f, callback) {
 }
 
 function isMobile() {
-	return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+	return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
 }
 
-function bytesToSize(bytes) {
-	var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-	if (bytes == 0) return '0 Byte';
-	var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-	return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+function bytesToSize(val) {
+	var sufix = [' Bytes', ' KB', ' MB', ' GB', ' TB'];
+	var size = val;
+	var i = 0;
+
+	// 1000 ca folosim sistemu metric
+	while(size/1000 > 1) {
+		i++;
+		size /= 1000;
+	}
+	return size.toFixed(2) + sufix[i];
 };
