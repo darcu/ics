@@ -28,7 +28,8 @@ var mimez = {
 	'pdf': 'pdf',
 
 	'txt': 'text',
-	'log': 'text',
+	'log': 'code',
+	'css': 'code',
 
 	'jpg': 'image',
 	'jpeg': 'image',

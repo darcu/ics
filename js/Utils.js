@@ -1,15 +1,4 @@
-function genRandomString() {
-	var sid = 1840724046193;
-	return Math.floor(Math.random() * sid).toString(36) + Math.abs(Math.floor(Math.random() * sid) ^ Date.now()).toString(36);
-}
-
-function urlFromFile(f) {
-	// here we assign a blobURL for the current file
-	var urlObj = URL || window.URL || webkitURL || window.webkitURL;
-	var url = urlObj.createObjectURL(f);
-
-	return url;
-}
+/*** image manipulation ***/
 
 // we should get this straight from the img element
 function calcImgHeight(url, callback) {
@@ -22,12 +11,14 @@ function calcImgHeight(url, callback) {
 	img.src = url;
 }
 
-function getMimeFromExt(ext) {
-	return mimez[ext.toLowerCase()];
-}
+/*** file operations ***/
 
-function getExtFromType(type) {
-	return type.split('/')[1];
+function urlFromFile(f) {
+	// here we assign a blobURL for the current file
+	var urlObj = URL || window.URL || webkitURL || window.webkitURL;
+	var url = urlObj.createObjectURL(f);
+
+	return url;
 }
 
 function textFromFile(f, callback) {
@@ -40,9 +31,13 @@ function textFromFile(f, callback) {
 	r.readAsText(f);
 }
 
+/*** browser checks ***/
+
 function isMobile() {
 	return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
 }
+
+/*** generics ***/
 
 function bytesToSize(val) {
 	var sufix = [' Bytes', ' KB', ' MB', ' GB', ' TB'];
@@ -55,4 +50,61 @@ function bytesToSize(val) {
 		size /= 1000;
 	}
 	return size.toFixed(2) + sufix[i];
+};
+
+function genRandomString() {
+	var sid = 1840724046193;
+	return Math.floor(Math.random() * sid).toString(36) + Math.abs(Math.floor(Math.random() * sid) ^ Date.now()).toString(36);
+}
+
+/*** supported mime types ***/
+
+function getMimeFromExt(ext) {
+	return mimez[ext.toLowerCase()];
+}
+
+var mimez = {
+	'zip': 'archive',
+	'7z': 'archive',
+	'rar': 'archive',
+	'ace': 'archive',
+	'gz': 'archive',
+	'tar': 'archive',
+	'bz2': 'archive',
+
+	'weba': 'audio',
+	'webm': 'video',
+	'webp': 'image',
+
+	'oga': 'audio',
+	'ogg': 'audio',
+	'ogv': 'video',
+	'ogx': 'video', // maybe
+
+	'mp3': 'audio',
+	'mp4': 'video',
+	'mp4a': 'audio',
+	'mp4s': 'video',
+	'mp4v': 'video',
+	'mpg4': 'video',
+
+	'wav': 'audio',
+
+	'pdf': 'pdf',
+
+	'txt': 'text',
+	'log': 'code',
+	'css': 'code',
+
+	'jpg': 'image',
+	'jpeg': 'image',
+	'jpe': 'image',
+	'bmp': 'image',
+	'bmp': 'image',
+	'gif': 'image',
+	'ico': 'image',
+	'png': 'image',
+	'svg': 'image',
+
+	// TODO add source code files maybe
 };

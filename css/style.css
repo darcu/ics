@@ -1028,19 +1028,25 @@ body .content {
   background-color: #42ff27;
 }
 .grid .item .box.text {
-  padding: 10px;
+  padding: 40px;
   background-color: #fff;
-  overflow: hidden;
-}
-.grid .item .box.text .fullContent {
-  height: 100%;
   font-size: 14px;
   line-height: 21px;
   color: #888888;
 }
+.grid .item .box.text .title {
+  width: 100%;
+  padding: 5px 0 15px 0;
+  font-size: 26px;
+  text-align: center;
+}
 .grid .item .box.text code {
-  color: #888888;
   white-space: pre-wrap;
+  overflow: hidden;
+}
+.grid .item .box.text .fullContent {
+  height: 100%;
+  overflow: hidden;
 }
 .grid .item .box.text .expand {
   position: absolute;
@@ -1194,17 +1200,23 @@ body .content {
   height: 100%;
 }
 #overlay .content .text {
+  font-size: 18px;
+  line-height: 28px;
   width: 90%;
   height: 90%;
   max-width: 1170px;
   margin: 30px auto;
-  padding: 10px;
+  padding: 80px;
   background-color: #fff;
   overflow: auto;
 }
 #overlay .content .text code {
-  color: #888888;
   white-space: pre-wrap;
+}
+#overlay .content .text .title {
+  font-size: 42px;
+  padding: 0 0 30px 0;
+  text-align: center;
 }
 #overlay .content .photo {
   position: absolute;
@@ -1260,5 +1272,8 @@ body .content {
 @media screen and (max-width: 768px) {
   #overlay .close {
     right: 5px;
+  }
+  #overlay .content .text {
+    padding: 80px 40px 40px 40px;
   }
 }

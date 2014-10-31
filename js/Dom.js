@@ -1,8 +1,8 @@
+/**** DOM utilities ****/
+
 // FIXME TODO rewrite all of these, at least rename the variables, cuz we ain't thieves and shit
 
-var Dom = {};
-
-Dom.createDom = function(obj) {
+function createDom(obj) {
 	var args = {
 		type: obj['type'] || null,
 		attributes: obj['attributes'] || null,
@@ -25,26 +25,28 @@ Dom.createDom = function(obj) {
 	return domElem;
 };
 
-Dom.removeClasses = function(node, aClass) {
+/**** class operations ****/
+
+function removeClasses(node, cn) {
 	if (!node) {
 		return;
 	}
 
-	(typeof aClass === 'string') && (aClass = [aClass]);
-	aClass.forEach(function(c) {
+	(typeof cn === 'string') && (cn = [cn]);
+	cn.forEach(function(c) {
 		var rgx = new RegExp('\\b' + c + '\\b');
 		node.className = node.className.replace(rgx, "");
 		node.className = node.className.trim();
 	});
 };
 
-Dom.addClasses = function(node, aClass) {
+function addClasses(node, cn) {
 	if (!node) {
 		return;
 	}
 
-	(typeof aClass === 'string') && (aClass = [aClass]);
-	aClass.forEach(function(c) {
+	(typeof cn === 'string') && (cn = [cn]);
+	cn.forEach(function(c) {
 		if (node.className.indexOf(c) === -1) {
 			node.className += ' ' + c;
 			node.className = node.className.trim();
@@ -52,25 +54,25 @@ Dom.addClasses = function(node, aClass) {
 	});
 };
 
-Dom.addRemoveClasses = function(node, aClass, toggle) {
-	toggle ? Dom.addClasses(node, aClass) : Dom.removeClasses(node, aClass);
-};
+// function addRemoveClasses(node, cn, toggle) {
+// 	toggle ? addClasses(node, cn) : removeClasses(node, cn);
+// };
 
-Dom.hasClass = function(node, aClass) {
-	return node && node.className.indexOf(aClass) > -1;
-};
+// function hasClass(node, cn) {
+// 	return node && node.className.indexOf(cn) > -1;
+// };
 
-Dom.toggleClass = function(node, aClass) {
-	if (!node) {
-		return;
-	}
+// function toggleClass(node, cn) {
+// 	if (!node) {
+// 		return;
+// 	}
 
-	(typeof aClass === 'string') && (aClass = [aClass]);
-	aClass.forEach(function(c) {
-		if (Dom.hasClass(node, c)) {
-			Dom.removeClasses(node, [c]);
-		} else {
-			Dom.addClasses(node, [c]);
-		}
-	});
-};
+// 	(typeof cn === 'string') && (cn = [cn]);
+// 	cn.forEach(function(c) {
+// 		if (hasClass(node, c)) {
+// 			removeClasses(node, [c]);
+// 		} else {
+// 			addClasses(node, [c]);
+// 		}
+// 	});
+// };

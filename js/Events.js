@@ -1,3 +1,5 @@
+// NOT USED FOR NOW
+
 var Event = (function() {
 	// the global Event object
 	var ev = {};
