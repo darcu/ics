@@ -968,7 +968,7 @@ body .content {
   float: left;
   width: 300px;
   height: 300px;
-  margin: 0px 5px 10px 5px;
+  padding: 5px;
   overflow: hidden;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
