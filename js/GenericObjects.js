@@ -1,36 +1,44 @@
 // this is the generic Item metadata holder
 var Item = function() {
-	var obj = {};
+	var o = {};
 
-	var init = function(file, url) {
-		obj.file = file;
-		obj.url = url || (file && urlFromFile(file)) || '';
-		obj.name = nameFromString((file && file.name) || url);
-		obj.ext = extFromString((file && file.name) || url);
-		obj.size = file ? file.size : 0;
-		obj.type = file ? file.type : '';
-		obj.mime = getMimeFromExt(obj.ext);
+	// var init = function(file, url) {
+	// 	o.file = file;
+	// 	o.url = url || (file && urlFromFile(file)) || '';
+	// 	o.name = nameFromString((file && file.name) || url);
+	// 	o.ext = extFromString((file && file.name) || url);
+	// 	o.size = file ? file.size : 0;
+	// 	o.mime = getMimeFromExt(o.ext);
+	// };
+
+	// o.initFromUrl = function(url, callback) {
+	// 	var mime = getMimeFromExt(extFromString(url));
+
+	// 	if (mime === 'image' || mime === 'text' || mime === 'code') {
+	// 		getRemoteFileFromUrl(url, function(blob) {
+	// 			init(blob, url);
+	// 			callback && callback();
+	// 		});
+	// 	} else {
+	// 		init(null, url);
+	// 		callback && callback();
+	// 	}
+	// };
+
+	o.initFromDropbox = function(file, meta, callback) {
+		o.file = file;
+		o.url = urlFromFile(file);
+		o.name = nameFromString(meta.name);
+		o.ext = extFromString(meta.name);
+		o.size = meta.size;
+		o.mime = getMimeFromExt(o.ext);
 	};
 
-	obj.initFromUrl = function(url, callback) {
-		var mime = getMimeFromExt(extFromString(url));
+	// o.init = function(file) {
+	// 	init(file);
+	// };
 
-		if (mime === 'image' || mime === 'text' || mime === 'code') {
-			getRemoteFileFromUrl(url, function(blob) {
-				init(blob, url);
-				callback && callback();
-			})
-		} else {
-			init(null, url);
-			callback && callback();
-		}
-	};
-
-	obj.init = function(file) {
-		init(file);
-	}
-
-	return obj;
+	return o;
 };
 
 // this is the generic UI Item holder

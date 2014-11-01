@@ -1,3 +1,7 @@
+function showError(err) {
+	console.log('shit ai', err);
+}
+
 /*** image manipulation ***/
 
 // we should get this straight from the img element
@@ -154,6 +158,4 @@ var mimez = {
 
 	'exe': 'executable',
 	'msi': 'executable'
-
-	// TODO add source code files maybe
 };
