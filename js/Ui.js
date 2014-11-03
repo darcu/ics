@@ -69,6 +69,89 @@ function createItemDom(i) {
 				item.appendChild(textDom);
 			});
 			break;
+		case 'audio':
+			audioPlayer.addTrack(i);
+			var audio = null,
+				progress = 0,
+				state = 'start',
+				progressRadial = '',
+				musicDom = createDom({
+					'type': 'div',
+					'attributes': {
+						'class': 'box music'
+					},
+					'content': [
+						createDom({
+							'type': 'button',
+							'attributes': {
+								'class': 'play'
+							},
+							'content': 'PLAY',
+							'events': {
+								'click': function(e) {
+									audioPlayer.playTrack(i.name);
+									return false;
+								}
+							}
+						}),
+						createDom({
+							'type': 'button',
+							'attributes': {
+								'class': 'pause'
+							},
+							'content': 'PAUSE',
+							'events': {
+								'click': function(e) {
+									audioPlayer.pauseTrack();
+									return false;
+								}
+							}
+						}),
+						createDom({
+							'type': 'button',
+							'attributes': {
+								'class': 'next'
+							},
+							'content': 'NEXT',
+							'events': {
+								'click': function(e) {
+									audioPlayer.nextTrack();
+									return false;
+								}
+							}
+						}),
+						createDom({
+							'type': 'button',
+							'attributes': {
+								'class': 'prev'
+							},
+							'content': 'PREV',
+							'events': {
+								'click': function(e) {
+									audioPlayer.prevTrack();
+									return false;
+								}
+							}
+						}),
+						createDom({
+							'type': 'div',
+							'attributes': {
+								'class': 'details'
+							},
+							'content': [
+								createDom({
+									'type': 'p',
+									'attributes': {
+										'class': 'title'
+									},
+									'content': i.name
+								})
+							]
+						})
+					]
+				});
+			item.appendChild(musicDom);
+			break;
 		default:
 			var extClass = i.mime || '',
 				downloadDom = createDom({
