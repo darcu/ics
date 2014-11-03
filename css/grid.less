@@ -59,7 +59,7 @@
 				cursor: pointer;
 				.transform(translateX(-50%,));
 				&:before{
-					content: '';
+					content: '\e61b';
 					position: absolute;
 					top: 0;
 					left: 0;
@@ -97,31 +97,23 @@
 					background-color: @pdf-color;
 					.downloadButton{
 						&:before{
-							content: '\e6bc';
+							content: '\e607';
 						}
 					}
 				}
-				&.rar{
-					background-color: @rar-color;
+				&.archive{
+					background-color: @archive-color;
 					.downloadButton{
 						&:before{
-							content: '\e6c9';
+							content: '\e60b';
 						}
 					}
 				}
-				&.zip{
-					background-color: @zip-color;
-					.downloadButton{
-						&:before{
-							content: '\e6f3';
-						}
-					}
-				}
-				&.exe, &.msi{
+				&.executable{
 					background-color: @exe-color;
 					.downloadButton{
 						&:before{
-							content: '\e679';
+							content: '\e60d';
 						}
 					}
 				}
@@ -149,8 +141,8 @@
 					text-align: center;
 				}
 				code{
+					display: block;
 					white-space: pre-wrap;
-					overflow: hidden;
 				}
 				.fullContent{
 					height: 100%;
@@ -213,7 +205,7 @@
 
 			.opacity(0);
 			&:before{
-				content: "\e60f";
+				content: "\e619";
 				position: absolute;
 				top: -50%;
 				left: 50%;
