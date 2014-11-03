@@ -159,6 +159,21 @@ select {
   vertical-align: middle;
 }
 /*  Colors  */
+/* Files type colors */
+lesshat-selector {
+  -lh-property: 0; } 
+@-webkit-keyframes bounce{ 0%{ -webkit-transform: scale(1);} 70%{ -webkit-transform: scale(1.1);} 100%{ -webkit-transform: scale(1)}}
+@-moz-keyframes bounce{ 0%{ -moz-transform: scale(1);} 70%{ -moz-transform: scale(1.1);} 100%{ -moz-transform: scale(1)}}
+@-o-keyframes bounce{ 0%{ -o-transform: scale(1);} 70%{ -o-transform: scale(1.1);} 100%{ -o-transform: scale(1)}}
+@keyframes bounce{ 0%{-webkit-transform: scale(1);-moz-transform: scale(1);-ms-transform: scale(1);transform: scale(1);} 70%{-webkit-transform: scale(1.1);-moz-transform: scale(1.1);-ms-transform: scale(1.1);transform: scale(1.1);} 100%{-webkit-transform: scale(1);-moz-transform: scale(1);-ms-transform: scale(1);transform: scale(1);};
+}
+lesshat-selector {
+  -lh-property: 0; } 
+@-webkit-keyframes fall{ 0%{ top: -100%;} 33%{ top: 100px;} 66%{ top: -100px}  100%{ top: 0;}}
+@-moz-keyframes fall{ 0%{ top: -100%;} 33%{ top: 100px;} 66%{ top: -100px}  100%{ top: 0;}}
+@-o-keyframes fall{ 0%{ top: -100%;} 33%{ top: 100px;} 66%{ top: -100px}  100%{ top: 0;}}
+@keyframes fall{ 0%{ top: -100%;} 33%{ top: 100px;} 66%{ top: -100px}  100%{ top: 0;};
+}
 /* General Style  */
 * {
   -webkit-box-sizing: border-box;
@@ -1000,6 +1015,37 @@ body .content {
   font-size: 20px;
   text-align: center;
 }
+.grid .item .box .downloadButton {
+  display: block;
+  position: relative;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin-top: 50px;
+  cursor: pointer;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.grid .item .box .downloadButton:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'ics';
+  font-size: 100px;
+  color: #fff;
+}
+.grid .item .box .downloadButton:hover:before {
+  -webkit-animation: bounce 1s ease infinite;
+  -moz-animation: bounce 1s ease infinite;
+  -o-animation: bounce 1s ease infinite;
+  animation: bounce 1s ease infinite;
+}
 .grid .item .box.photo {
   cursor: pointer;
 }
@@ -1020,6 +1066,32 @@ body .content {
 }
 .grid .item .box.download {
   background-color: #ff530d;
+}
+.grid .item .box.download.pdf {
+  background-color: #c11e07;
+}
+.grid .item .box.download.pdf .downloadButton:before {
+  content: '\e6bc';
+}
+.grid .item .box.download.rar {
+  background-color: #9d49a1;
+}
+.grid .item .box.download.rar .downloadButton:before {
+  content: '\e6c9';
+}
+.grid .item .box.download.zip {
+  background-color: #53b32b;
+}
+.grid .item .box.download.zip .downloadButton:before {
+  content: '\e6f3';
+}
+.grid .item .box.download.exe,
+.grid .item .box.download.msi {
+  background-color: #d1b61c;
+}
+.grid .item .box.download.exe .downloadButton:before,
+.grid .item .box.download.msi .downloadButton:before {
+  content: '\e679';
 }
 .grid .item .box.video {
   background-color: #ffd01e;
@@ -1123,35 +1195,6 @@ body .content {
   border-radius: 15px;
   background-clip: padding-box;
 }
-.grid .item.selected {
-  width: 100%;
-  height: auto;
-  max-height: 100vh;
-  padding: 15px;
-  background-color: #393939;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
-.grid .item.selected .box .overlay {
-  display: none;
-}
-.grid .item.selected .box.photo {
-  margin: 0 auto;
-}
-.grid .item.selected .box.photo img {
-  max-width: 100%;
-  max-height: 100%;
-}
-.grid .item.selected .box.photo .hor {
-  height: auto;
-  max-height: 95vh;
-}
-.grid .item.selected .box.photo .vert {
-  width: auto;
-  max-height: 90vh;
-}
 .grid .item:hover .overlay {
   zoom: 1;
   filter: alpha(opacity=100);
@@ -1182,6 +1225,23 @@ body .content {
     padding: 2px;
   }
 }
+@media screen and (max-width: 480px) {
+  .grid .item .box .details .title {
+    padding: 0 0 10px 0;
+    font-size: 20px;
+  }
+  .grid .item .box .details .size {
+    font-size: 16px;
+  }
+  .grid .item .box .downloadButton {
+    width: 70px;
+    height: 70px;
+    margin-top: 15px;
+  }
+  .grid .item .box .downloadButton:before {
+    font-size: 70px;
+  }
+}
 #overlay {
   position: fixed;
   top: 0;
@@ -1190,6 +1250,10 @@ body .content {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.85);
   overflow: hidden;
+  -webkit-animation: fall 0.4s linear;
+  -moz-animation: fall 0.4s linear;
+  -o-animation: fall 0.4s linear;
+  animation: fall 0.4s linear;
 }
 #overlay.hide {
   display: none;

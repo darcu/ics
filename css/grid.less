@@ -46,6 +46,37 @@
 					text-align: center;
 				}
 			}
+			.downloadButton{
+				display: block;
+				position: relative;
+				left: 50%;
+
+				width: 100px;
+				height: 100px;
+
+				margin-top: 50px;
+
+				cursor: pointer;
+				.transform(translateX(-50%,));
+				&:before{
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 0;
+
+					width: 100%;
+					height: 100%;
+
+					font-family: 'ics';
+					font-size: 100px;
+					color: #fff;
+				}
+				&:hover{
+					&:before{
+						.animation(bounce 1s ease infinite);
+					}
+				}
+			}
 			&.photo{
 				cursor: pointer;
 				img{
@@ -62,6 +93,38 @@
 			}
 			&.download{
 				background-color: @download-color;
+				&.pdf{
+					background-color: @pdf-color;
+					.downloadButton{
+						&:before{
+							content: '\e6bc';
+						}
+					}
+				}
+				&.rar{
+					background-color: @rar-color;
+					.downloadButton{
+						&:before{
+							content: '\e6c9';
+						}
+					}
+				}
+				&.zip{
+					background-color: @zip-color;
+					.downloadButton{
+						&:before{
+							content: '\e6f3';
+						}
+					}
+				}
+				&.exe, &.msi{
+					background-color: @exe-color;
+					.downloadButton{
+						&:before{
+							content: '\e679';
+						}
+					}
+				}
 			}
 			&.video{
 				background-color: @video-color;
@@ -170,37 +233,6 @@
 				.border-radius(15px);
 			}
 		}
-		&.selected{ // when this class is activated 
-			width: 100%;
-			height: auto;
-			max-height: 100vh;
-			padding: 15px;
-
-			background-color: @box-bg-color;
-			.transition(all 0.3s ease);
-			.box{
-				.overlay{
-					display: none;
-				}
-				&.photo{
-					margin: 0 auto;
-					img{ // hack for horizontal align
-						max-width: 100%;
-						max-height: 100%;
-						
-					}
-					.hor{
-						height: auto;
-						max-height: 95vh
-					}
-					.vert{
-						width: auto;
-						max-height: 90vh;
-					}
-
-				}
-			}
-		}
 		&:hover{
 			.overlay{
 				.opacity(1);
@@ -214,7 +246,6 @@
 		}
 	}
 }
-
 @media screen and (max-width: 768px) {
 	.grid{
 		.item{
@@ -223,6 +254,33 @@
 
 			margin: 0;
 			padding: 2px;
+		}
+	}
+}
+@media screen and (max-width: 480px) {
+	.grid{
+		.item{
+			.box{
+				.details{
+					.title{
+						padding: 0 0 10px 0;
+
+						font-size: 20px;
+					}
+					.size{
+						font-size: 16px;
+					}
+				}
+				.downloadButton{
+					width: 70px;
+					height: 70px;
+
+					margin-top: 15px;
+					&:before{
+						font-size: 70px;
+					}
+				}
+			}
 		}
 	}
 }
