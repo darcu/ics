@@ -111,6 +111,11 @@ function createItemDom(i) {
 			item.appendChild(downloadDom);
 	}
 
+	(i.mime === 'image') && calcImgHeight(i.url, function(aspect) {
+		var className = (aspect >= 1 ? 'hor' : 'vert');
+		addClasses(imageDom.getElementsByTagName('img')[0], className);
+	});
+
 	return item;
 }
 
@@ -125,7 +130,10 @@ var contentOverlay = (function() {
 		content;
 
 	function hideModal(e) {
-		content.innerHTML = '';
+		imageElem.src = '';
+		textDom.innerHTML
+		addClasses(textElem, 'hide');
+		addClasses(imageElem, 'hide');
 		addClasses(container, 'hide');
 	}
 
@@ -167,49 +175,58 @@ var contentOverlay = (function() {
 	});
 	document.body.appendChild(container);
 
+	var imageElem = createDom({
+		'type': 'img',
+		'attributes': {
+			'class': 'photo hide'
+			/*,
+			'src': i.url*/
+		}
+	});
+	content.appendChild(imageElem);
+
+	var textDom = createDom({
+		// 'type': (i.mime === 'text' ? 'p' : 'code')
+		'type': 'p'
+	});
+
+	var titleDom = createDom({
+		'type': 'p',
+		'attributes': {
+			'class': 'title'
+		}
+	});
+
+	var textElem = createDom({
+		'type': 'div',
+		'attributes': {
+			'class': 'text hide'
+		},
+		'events': {
+			'click': function(e) {
+				e.stopPropagation();
+			}
+		},
+		'content': [
+			titleDom,
+			textDom
+		]
+	});
+	content.appendChild(textElem);
+
 	singleton.showImage = function(i) {
 		showModal();
-
-		var imageElem = createDom({
-			'type': 'img',
-			'attributes': {
-				'class': 'photo',
-				'src': i.url
-			}
-		});
-		content.appendChild(imageElem);
+		imageElem.src = i.url;
+		removeClasses(imageElem, 'hide');
 	};
 
 	singleton.showText = function(i) {
 		showModal();
 
 		textFromFile(i.file, function(text) {
-			var codeExt = ['css', 'html'],
-				textElem = createDom({
-					'type': 'div',
-					'attributes': {
-						'class': 'text'
-					},
-					'events': {
-						'click': function(e) {
-							e.stopPropagation();
-						}
-					},
-					'content': [
-						createDom({
-							'type': 'p',
-							'attributes': {
-								'class': 'title'
-							},
-							'content': i.name
-						}),
-						createDom({
-							'type': (i.mime === 'text' ? 'p' : 'code'),
-							'content': text
-						})
-					]
-				});
-			content.appendChild(textElem);
+			titleDom.innerHTML = i.name;
+			textDom.innerHTML = text;
+			removeClasses(textElem, 'hide');
 		});
 	};
 

@@ -618,6 +618,9 @@ body .content {
   padding: 0 0 30px 0;
   text-align: center;
 }
+#overlay .content .text.hide {
+  display: none;
+}
 #overlay .content .photo {
   position: absolute;
   top: 50%;
@@ -630,6 +633,9 @@ body .content {
   -o-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+#overlay .content .photo.hide {
+  display: none;
 }
 #overlay .close {
   position: absolute;

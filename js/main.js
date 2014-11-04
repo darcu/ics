@@ -4,7 +4,7 @@ var boxes = (function() {
 	var uiItems = [];
 
 	var draw = function() {
-		document.getElementById('list').insertBefore(uiItems[uiItems.length - 1].dom, null);
+		document.getElementById('list').insertBefore(uiItems[uiItems.length - 1], null);
 	};
 
 	// boxes.pushFile = function(f) {
@@ -28,13 +28,10 @@ var boxes = (function() {
 	// };
 
 	boxes.pushDropbox = function(f, meta) {
-		var item = new Item();
-
-		// we must wait for the content to load, so we use a callback
-		item.initFromDropbox(f, meta);
+		var item = new Item(f, meta, '', 'Dropbox');
 
 		items.push(item);
-		uiItems.push(new UiItem(item));
+		uiItems.push(createItemDom(item));
 
 		draw();
 	};
@@ -43,27 +40,27 @@ var boxes = (function() {
 }());
 
 function dropthebox() {
-	var client = new Dropbox.Client({
+	var dbClient = new Dropbox.Client({
 		key: '51rqcwrylm53i02'
 	});
 
-	client.authenticate({}, function(error) {
+	dbClient.authenticate({}, function(error) {
 		error && showError(error);
 	});
 
-	client.readdir("/", function(error, entries) {
+	dbClient.readdir("/", function(error, entries) {
 		if (error) {
 			return showError(error);
 		}
 
 		entries.forEach(function(fileName) {
-			client.metadata(fileName, {}, function(error, stat) {
+			dbClient.metadata(fileName, {}, function(error, stat) {
 				if (error) {
 					return showError(error);
 				}
 
 				if (stat.isFile) {
-					client.readFile(fileName, {
+					dbClient.readFile(fileName, {
 						blob: true
 					}, function(error, data) {
 						if (error) {
