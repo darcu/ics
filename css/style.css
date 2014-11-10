@@ -414,8 +414,13 @@ body .content {
 .grid .item .box.download.pdf {
   background-color: #c11e07;
 }
+<<<<<<< HEAD
 .grid .item .box.download.pdf .downloadButton:before {
   content: '\e607';
+=======
+.grid .item .box.music {
+  background-color: #44b034;
+>>>>>>> putin stil pentru mp3 boxes
 }
 .grid .item .box.download.archive {
   background-color: #9d49a1;
@@ -434,6 +439,22 @@ body .content {
 }
 .grid .item .box.mp3 {
   background-color: #42ff27;
+}
+.grid .item .box.music .play,
+.grid .item .box.music .pause {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: 70px;
+  height: 70px;
+  background: transparent;
+  border: 0px solid transparent;
+  cursor: pointer;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 .grid .item .box.text {
   padding: 40px;
@@ -531,6 +552,38 @@ body .content {
   border-radius: 15px;
   background-clip: padding-box;
 }
+<<<<<<< HEAD
+=======
+.grid .item.selected {
+  width: 100%;
+  height: auto;
+  max-height: 100vh;
+  padding: 15px;
+  background-color: #393939;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.grid .item.selected .box .overlay {
+  display: none;
+}
+.grid .item.selected .box.photo {
+  margin: 0 auto;
+}
+.grid .item.selected .box.photo img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.grid .item.selected .box.photo .hor {
+  height: auto;
+  max-height: 95vh;
+}
+.grid .item.selected .box.photo .vert {
+  width: auto;
+  max-height: 90vh;
+}
+>>>>>>> putin stil pentru mp3 boxes
 .grid .item:hover .overlay {
   zoom: 1;
   filter: alpha(opacity=100);
