@@ -7,47 +7,83 @@ var audioPlayer = (function() {
 	var audioName,
 		audioCoverImage,
 		audioTime,
-		audioTracker;
-	var audioDom = createDom({
-		'type': 'div',
-		'attributes': {
-			'class': 'mp3Player'
-		},
-		'content': [
-			audioCoverImage = createDom({
-				'type': 'div',
-				'attributes': {
-					'class': 'coverImage'
-				}
-			}),
-			createDom({
-				'type': 'div',
-				'attributes': {
-					'class': 'details'
-				},
-				'content': [
-					audioName = createDom({
-						'type': 'div',
-						'attributes': {
-							'class': 'name'
-						}
-					}),
-					audioTime = createDom({
-						'type': 'div',
-						'attributes': {
-							'class': 'time'
-						}
-					}),
-					audioTracker = createDom({
-						'type': 'div',
-						'attributes': {
-							'class': 'tracker'
-						}
-					})
-				]
-			})
-		]
-	});
+		audioTracker,
+		audioDom = createDom({
+			'type': 'div',
+			'attributes': {
+				'class': 'mp3Player'
+			},
+			'content': [
+				audioCoverImage = createDom({
+					'type': 'div',
+					'attributes': {
+						'class': 'coverImage'
+					}
+				}),
+				createDom({
+					'type': 'div',
+					'attributes': {
+						'class': 'controls'
+					},
+					'content': [
+						createDom({
+							'type': 'div',
+							'attributes': {
+								'class': 'prev'
+							},
+							'events': {
+								'click': function() {
+									singleton.prevTrack();
+								}
+							}
+						}),
+						createDom({
+							'type': 'div',
+							'attributes': {
+								'class': 'play'
+							}
+						}),
+						createDom({
+							'type': 'div',
+							'attributes': {
+								'class': 'next'
+							},
+							'events': {
+								'click': function() {
+									singleton.nextTrack();
+								}
+							}
+						})
+					]
+				}),
+				createDom({
+					'type': 'div',
+					'attributes': {
+						'class': 'details'
+					},
+					'content': [
+						audioName = createDom({
+							'type': 'div',
+							'attributes': {
+								'class': 'name'
+							}
+						}),
+						audioTime = createDom({
+							'type': 'div',
+							'attributes': {
+								'class': 'time'
+							}
+						}),
+						audioTracker = createDom({
+							'type': 'div',
+							'attributes': {
+								'class': 'tracker'
+							}
+						})
+					]
+				})
+			]
+		});
 	document.getElementsByClassName('content')[0].appendChild(audioDom);
 
 	//for now we use the name instead of ID (to replace).
@@ -61,6 +97,7 @@ var audioPlayer = (function() {
 			currentTrack = id;
 			audio.src = tracks[id]['url'];
 			audio.play();
+			populateDom(tracks[id]);
 		} else {
 			currentTrack = id;
 			audio.play();
@@ -104,6 +141,20 @@ var audioPlayer = (function() {
 			i = keys.indexOf(key);
 		return (i !== -1 && keys[i - 1]) ? obj[keys[i - 1]] : obj[keys[keys.length - 1]];
 	};
+
+	function populateDom(obj) {
+		//audioCoverImage cand o fi
+
+		audioName.innerHTML = obj.name;
+
+		audioEvents();
+	};
+
+	function audioEvents() {
+
+	}
+
+
 
 	return singleton;
 })();
