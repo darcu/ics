@@ -350,6 +350,9 @@ body .content {
   padding: 0 0 15px 0;
   font-size: 26px;
   text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .grid .item .box .details .size {
   padding: 0 0 10px;
@@ -362,7 +365,7 @@ body .content {
   left: 50%;
   width: 100px;
   height: 100px;
-  margin-top: 50px;
+  margin-top: 65px;
   cursor: pointer;
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
