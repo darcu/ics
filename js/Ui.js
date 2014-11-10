@@ -95,45 +95,6 @@ function createItemDom(i) {
 							}
 						}),
 						createDom({
-							'type': 'button',
-							'attributes': {
-								'class': 'pause'
-							},
-							'content': 'PAUSE',
-							'events': {
-								'click': function(e) {
-									audioPlayer.pauseTrack();
-									return false;
-								}
-							}
-						}),
-						createDom({
-							'type': 'button',
-							'attributes': {
-								'class': 'next'
-							},
-							'content': 'NEXT',
-							'events': {
-								'click': function(e) {
-									audioPlayer.nextTrack();
-									return false;
-								}
-							}
-						}),
-						createDom({
-							'type': 'button',
-							'attributes': {
-								'class': 'prev'
-							},
-							'content': 'PREV',
-							'events': {
-								'click': function(e) {
-									audioPlayer.prevTrack();
-									return false;
-								}
-							}
-						}),
-						createDom({
 							'type': 'div',
 							'attributes': {
 								'class': 'details'
