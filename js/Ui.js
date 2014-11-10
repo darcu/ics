@@ -86,7 +86,6 @@ function createItemDom(i) {
 							'attributes': {
 								'class': 'play'
 							},
-							'content': 'PLAY',
 							'events': {
 								'click': function(e) {
 									audioPlayer.playTrack(i.name);

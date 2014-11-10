@@ -4,13 +4,17 @@ var audioPlayer = (function() {
 		currentTrack = '',
 		audio = new Audio();
 
+	var audioName,
+		audioCoverImage,
+		audioTime,
+		audioTracker;
 	var audioDom = createDom({
 		'type': 'div',
 		'attributes': {
 			'class': 'mp3Player'
 		},
 		'content': [
-			createDom({
+			audioCoverImage = createDom({
 				'type': 'div',
 				'attributes': {
 					'class': 'coverImage'
@@ -22,19 +26,19 @@ var audioPlayer = (function() {
 					'class': 'details'
 				},
 				'content': [
-					createDom({
+					audioName = createDom({
 						'type': 'div',
 						'attributes': {
 							'class': 'name'
 						}
 					}),
-					createDom({
+					audioTime = createDom({
 						'type': 'div',
 						'attributes': {
 							'class': 'time'
 						}
 					}),
-					createDom({
+					audioTracker = createDom({
 						'type': 'div',
 						'attributes': {
 							'class': 'tracker'
