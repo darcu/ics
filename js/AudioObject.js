@@ -63,7 +63,7 @@ var audioPlayer = (function() {
 					},
 					'content': [
 						audioName = createDom({
-							'type': 'div',
+							'type': 'p',
 							'attributes': {
 								'class': 'name'
 							}
