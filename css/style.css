@@ -676,11 +676,43 @@ body .content {
   height: 100%;
   float: left;
 }
+.mp3Player .controls {
+  position: relative;
+  width: 200px;
+  height: 100%;
+  float: left;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+.mp3Player .controls .play,
+.mp3Player .controls .prev,
+.mp3Player .controls .next {
+  height: 100%;
+  float: left;
+  cursor: pointer;
+}
+.mp3Player .controls .prev,
+.mp3Player .controls .next {
+  width: 25%;
+  background-color: #000;
+}
+.mp3Player .controls .play {
+  width: 50%;
+  background-color: #ff0000;
+}
 .mp3Player .details {
   position: relative;
   height: 100%;
+  float: left;
   background-color: rgba(0, 0, 0, 0.5);
+<<<<<<< HEAD
 >>>>>>> inceput stil pentru mp3Player
+=======
+  -lh-property: 0;
+width:-webkit-calc(100% - 270px);
+width:-moz-calc(100% - 270px);
+width:calc(100% - 270px);
+;
+>>>>>>> stil de test pentru mp3player
 }
 #overlay {
   position: fixed;
