@@ -41,6 +41,9 @@ var mimez = {
 	'png': 'image',
 	'svg': 'image',
 
+	'exe': 'executable',
+	'msi': 'executable',
+
 	// TODO add source code files maybe
 };
 
