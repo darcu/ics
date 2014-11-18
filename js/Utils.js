@@ -1,3 +1,7 @@
+'use strict';
+
+/* global webkitURL */
+
 function showError(err) {
 	console.log('shit ai', err);
 }
@@ -45,7 +49,7 @@ function getRemoteFileFromUrl(url, callback) {
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', url, true);
 	xhr.responseType = 'blob';
-	xhr.addEventListener('load', function(e) {
+	xhr.addEventListener('load', function() {
 		if (xhr.status !== 200) {
 			onError();
 		} else {
@@ -82,7 +86,7 @@ function bytesToSize(val) {
 		size /= 1000;
 	}
 	return size.toFixed(2) + sufix[i];
-};
+}
 
 function genRandomString() {
 	var sid = 1840724046193;
@@ -96,7 +100,7 @@ function nameFromString(str) {
 	var end = str.length - 1;
 	str.lastIndexOf('/') !== -1 && (start = str.lastIndexOf('/') + 1);
 	str.lastIndexOf('.') !== -1 && (end = str.lastIndexOf('.'));
-	
+
 	return str.substring(start, end);
 }
 
@@ -109,9 +113,14 @@ function extFromString(str) {
 
 /*** supported mime types ***/
 
-function getMimeFromExt(ext) {
-	return mimez[ext.toLowerCase()];
-}
+var TYPE = {
+	'ICON': 0,
+	'IMAGE': 1,
+	'TEXT': 2,
+	0: 'ICON',
+	1: 'IMAGE',
+	2: 'TEXT'
+};
 
 var mimez = {
 	'zip': 'archive',
@@ -150,7 +159,6 @@ var mimez = {
 	'jpeg': 'image',
 	'jpe': 'image',
 	'bmp': 'image',
-	'bmp': 'image',
 	'gif': 'image',
 	'ico': 'image',
 	'png': 'image',
@@ -159,3 +167,24 @@ var mimez = {
 	'exe': 'executable',
 	'msi': 'executable'
 };
+
+function typeFromMime(mime) {
+	switch (mime[0]) {
+		case 'image':
+			// if jpeg, png, etc.
+			if (mimez[mime[1]]) {
+				return TYPE.IMAGE;
+			}
+			break;
+		case 'text':
+			if (mime[1] === 'plain') {
+				return TYPE.TEXT;
+			}
+			break;
+	}
+	return null;
+}
+
+function mimeFromExt(ext) {
+	return mimez[ext.toLowerCase()];
+}

@@ -1,3 +1,10 @@
+'use strict';
+
+/* global newItem */
+/* global createItemDom */
+/* global Dropbox */
+/* global showError */
+
 var boxes = (function() {
 	var boxes = {};
 	var items = [];
@@ -27,14 +34,16 @@ var boxes = (function() {
 	// 	});
 	// };
 
-	boxes.pushDropbox = function(f, meta) {
-		var item = new Item(f, meta, '', 'Dropbox');
+	boxes.pushDropbox = function(meta) {
+		var item = new Item(meta, 'Dropbox');
 
 		items.push(item);
 		uiItems.push(createItemDom(item));
 
 		draw();
 	};
+
+	boxes.dropbox = null;
 
 	return boxes;
 }());
@@ -48,10 +57,12 @@ function dropthebox() {
 		error && showError(error);
 	});
 
-	dbClient.readdir("/", function(error, entries) {
+	dbClient.readdir('/', function(error, entries) {
 		if (error) {
 			return showError(error);
 		}
+
+		boxes.dropbox = dbClient;
 
 		entries.forEach(function(fileName) {
 			dbClient.metadata(fileName, {}, function(error, stat) {
@@ -60,15 +71,19 @@ function dropthebox() {
 				}
 
 				if (stat.isFile) {
-					dbClient.readFile(fileName, {
-						blob: true
-					}, function(error, data) {
-						if (error) {
-							return showError(error);
-						}
+					boxes.pushDropbox(stat);
+					// console.log('fn');
+					// console.log(fileName);
 
-						boxes.pushDropbox(data, stat);
-					});
+					// dbClient.readFile(fileName, {
+					// 	blob: true
+					// }, function(error, data) {
+					// 	if (error) {
+					// 		return showError(error);
+					// 	}
+
+					// 	boxes.pushDropbox(data, stat);
+					// });
 				}
 			});
 		});
