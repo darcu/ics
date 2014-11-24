@@ -1,4 +1,3 @@
-@import url(http://fonts.googleapis.com/css?family=Abel);
 /* 
 html5doctor.com Reset Stylesheet
 v1.6.1
@@ -334,6 +333,7 @@ body .content {
 .grid .item .box {
   display: block;
   position: relative;
+  background-color: #0f0;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -577,6 +577,21 @@ body .content {
   .grid .item .box .downloadButton:before {
     font-size: 70px;
   }
+}
+.dirList {
+  color: #fff;
+  margin: 40px;
+}
+.dirList li {
+  line-height: 30px;
+  padding: 0 20px;
+  list-style-type: none;
+}
+.dirList li:nth-child(even) {
+  background: #202a34;
+}
+.dirList li:nth-child(odd) {
+  background: #303a44;
 }
 #overlay {
   position: fixed;

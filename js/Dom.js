@@ -1,28 +1,71 @@
+'use strict';
+
 /**** DOM utilities ****/
 
 // FIXME TODO rewrite all of these, at least rename the variables, cuz we ain't thieves and shit
 
-function createDom(obj) {
-	var args = {
-		type: obj['type'] || null,
-		attributes: obj['attributes'] || null,
-		content: obj['content'] ? (Array.isArray(obj['content']) ? obj['content'] : [obj['content']]) : [],
-		events: obj['events'] || {}
-	};
-	var domElem = document.createElement(args['type']);
+function createDom(args) {
+	if (args.type) {
+		var domElem = document.createElement(args.type);
+		delete args.type;
+	}
 
-	for (var i in args.attributes) {
-		args.attributes.hasOwnProperty(i) && domElem.setAttribute(i, args.attributes[i]);
+	if (args.events) {
+		for (var i in args.events) {
+			if (args.events.hasOwnProperty(i)) {
+				domElem.addEventListener(i, args.events[i]);
+			}
+		}
+		delete args.events;
 	}
-	for (var i in args.events) {
-		args.events.hasOwnProperty(i) && domElem.addEventListener(i, args.events[i]);
+
+	if (args.content) {
+		!Array.isArray(args.content) && (args.content = [args.content]);
+
+		var container = document.createDocumentFragment();
+		for (var i = 0, n = args.content.length; i < n; i += 1) {
+			var item = null;
+			if (typeof args.content[i] === 'string' || typeof args.content[i] === 'number') {
+				item = document.createTextNode(args.content[i]);
+			} else {
+				item = args.content[i];
+			}
+
+			(item !== null) && container.appendChild(item);
+		}
+
+		container && domElem.appendChild(container);
+		delete args.content;
 	}
-	var container = document.createDocumentFragment();
-	for (var i = 0, n = args.content.length; i < n; i += 1) {
-		args.content[i] && container.appendChild(typeof args.content[i] == "string" || typeof args.content[i] == "number" ? document.createTextNode(args.content[i]) : args.content[i]);
+
+	for (var attr in args) {
+		if (args.hasOwnProperty(attr)) {
+			domElem.setAttribute(attr, args[attr]);
+		}
 	}
-	domElem.appendChild(container);
+
 	return domElem;
+	////////////
+	// var args = {
+	// 	type: obj['type'] || null,
+	// 	attributes: obj['attributes'] || null,
+	// 	content: obj['content'] ? (Array.isArray(obj['content']) ? obj['content'] : [obj['content']]) : [],
+	// 	events: obj['events'] || {}
+	// };
+	// var domElem = document.createElement(args['type']);
+
+	// args.classes && domElem.setAttribute('className', args.classes);
+	// for (var i in args.attributes) {
+	// 	args.attributes.hasOwnProperty(i) && domElem.setAttribute(i, args.attributes[i]);
+	// }
+
+
+	// var container = document.createDocumentFragment();
+	// for (var i = 0, n = args.content.length; i < n; i += 1) {
+	// 	args.content[i] && container.appendChild(typeof args.content[i] == "string" || typeof args.content[i] == "number" ? document.createTextNode(args.content[i]) : args.content[i]);
+	// }
+	// domElem.appendChild(container);
+	// return domElem;
 };
 
 /**** class operations ****/
@@ -53,6 +96,8 @@ function addClasses(node, cn) {
 		}
 	});
 };
+
+var $ = document.querySelector;
 
 // function addRemoveClasses(node, cn, toggle) {
 // 	toggle ? addClasses(node, cn) : removeClasses(node, cn);

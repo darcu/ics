@@ -43,6 +43,16 @@ var boxes = (function() {
 		draw();
 	};
 
+	boxes.reset = function() {
+		boxes = {};
+		items = [];
+		for (var i = 0, n = uiItems.length; i < n; i++) {
+			uiItems[i].parentNode.removeChild(uiItems[i]);
+		}
+
+		uiItems = [];
+	};
+
 	boxes.dropbox = null;
 
 	return boxes;
@@ -57,37 +67,43 @@ function dropthebox() {
 		error && showError(error);
 	});
 
-	dbClient.readdir('/', function(error, entries) {
-		if (error) {
-			return showError(error);
+	boxes.dropbox = dbClient;
+
+	displayDir('/');
+
+	function displayDir(rootPath) {
+		boxes.reset();
+
+		var rootElem = document.querySelector('.dirList');
+		var kids = rootElem.childNodes;
+		for (var i = 0, n = kids.length; i < n; i++) {
+			rootElem.removeChild(kids[i]);
 		}
 
-		boxes.dropbox = dbClient;
+		dbClient.readdir(rootPath, {}, function(error, entryNames, rootData, entriesData) {
+			var listEntries = [];
 
-		entries.forEach(function(fileName) {
-			dbClient.metadata(fileName, {}, function(error, stat) {
-				if (error) {
-					return showError(error);
+			entriesData && entriesData.forEach(function(data, i) {
+				// console.log(data.isFolder);
+				if (data.isFolder) {
+					listEntries.push({
+						'name': entryNames[i],
+						'path': entriesData[i].path
+					});
+				} else {
+					boxes.pushDropbox(data);
 				}
+			});
 
-				if (stat.isFile) {
-					boxes.pushDropbox(stat);
-					// console.log('fn');
-					// console.log(fileName);
-
-					// dbClient.readFile(fileName, {
-					// 	blob: true
-					// }, function(error, data) {
-					// 	if (error) {
-					// 		return showError(error);
-					// 	}
-
-					// 	boxes.pushDropbox(data, stat);
-					// });
+			rootChooserDom(null, listEntries, function(i) {
+				if (i === -1) {
+					displayDir(rootPath.substring(0, rootPath.lastIndexOf('/')));
+				} else {
+					displayDir(listEntries[i].path);
 				}
 			});
 		});
-	});
+	}
 }
 
 dropthebox();

@@ -4,6 +4,7 @@ var Item = function(meta, type) {
 	switch (type) {
 		case 'Dropbox':
 			this.name = meta.name;
+			this.path = meta.path;
 			this.size = meta.size;
 			this.humanSize = meta.humanSize;
 			this.type = {};

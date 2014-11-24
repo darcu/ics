@@ -1,3 +1,51 @@
+'use strict';
+
+/* global createDom */
+/* global TYPE */
+/* global isMobile */
+/* global textFromFile */
+/* global bytesToSize */
+/* global calcImgHeight */
+/* global addClasses */
+/* global removeClasses */
+/* global boxes */
+/* global urlFromFile */
+/* global showError */
+
+function rootChooserDom(parentElem, dirs, callback) {
+	!parentElem && (parentElem = document.querySelector('.dirList'));
+
+	var list = createDom({
+		'type': 'ul',
+		'content': createDom({
+			'type': 'li',
+			'classes': 'root listItem',
+			'content': '..',
+			'events': {
+				'click': function(e) {
+					callback(-1);
+				}
+			}
+		})
+	});
+
+	// for (var i = 0, n = dirNames.length; i < n; i++) {
+	dirs.forEach(function(dir, i) {
+		list.appendChild(createDom({
+			'type': 'li',
+			'classes': 'listItem',
+			'content': dir.name,
+			'events': {
+				'click': function(e) {
+					callback(i);
+				}
+			}
+		}));
+	});
+
+	parentElem.appendChild(list);
+}
+
 // add a new to the page from a file
 function createItemDom(i) {
 	function draw() {
@@ -6,25 +54,19 @@ function createItemDom(i) {
 			case TYPE.IMAGE:
 				var imageDom = createDom({
 					'type': 'div',
-					'attributes': {
-						'class': isMobile() ? 'box photo mobile' : 'box photo'
-					},
+					'class': isMobile() ? 'box photo mobile' : 'box photo',
 					'content': [
 						createDom({
 							'type': 'img',
-							'attributes': {
-								'src': i.url
-							}
+							'src': i.url
 						}),
 						createDom({
 							'type': 'div',
-							'attributes': {
-								'class': 'overlay'
-							}
+							'class': 'overlay'
 						})
 					],
 					'events': {
-						'click': function(e) {
+						'click': function() {
 							contentOverlay.showImage(i);
 							return false;
 						}
@@ -37,11 +79,9 @@ function createItemDom(i) {
 				textFromFile(i.file, function(text) {
 					var textDom = createDom({
 						'type': 'div',
-						'attributes': {
-							'class': 'box text'
-						},
+						'class': 'box text',
 						'events': {
-							'click': function(e) {
+							'click': function() {
 								contentOverlay.showText(i);
 								return false;
 							}
@@ -50,16 +90,12 @@ function createItemDom(i) {
 							createDom({
 								// TODO change this
 								'type': (i.type.splitMime[0] === 'text' ? 'p' : 'code'),
-								'attributes': {
-									'class': 'fullContent'
-								},
-								'content': text,
+								'class': 'fullContent',
+								'content': text
 							}),
 							createDom({
 								'type': 'p',
-								'attributes': {
-									'class': 'title'
-								},
+								'class': 'title',
 								'content': i.name
 							})
 						]
@@ -71,35 +107,25 @@ function createItemDom(i) {
 				var extClass = i.type.className || '',
 					downloadDom = createDom({
 						'type': 'div',
-						'attributes': {
-							'class': 'box download ' + extClass
-						},
+						'class': 'box download ' + extClass,
 						'content': [
 							createDom({
 								'type': 'a',
-								'attributes': {
-									'class': 'downloadButton',
-									'href': i.url
-								}
+								'class': 'downloadButton',
+								'href': i.url
 							}),
 							createDom({
 								'type': 'div',
-								'attributes': {
-									'class': 'details'
-								},
+								'class': 'details',
 								'content': [
 									createDom({
 										'type': 'p',
-										'attributes': {
-											'class': 'title'
-										},
+										'class': 'title',
 										'content': i.name
 									}),
 									createDom({
 										'type': 'p',
-										'attributes': {
-											'class': 'size'
-										},
+										'class': 'size',
 										'content': bytesToSize(i.size)
 									})
 								]
@@ -120,7 +146,7 @@ function createItemDom(i) {
 	item.className = 'item';
 
 	if (i.type.type) {
-		boxes.dropbox.readFile(i.name, {
+		boxes.dropbox.readFile(i.path, {
 				blob: true
 			},
 			function(error, data) {
@@ -150,9 +176,9 @@ var contentOverlay = (function() {
 		container,
 		content;
 
-	function hideModal(e) {
+	function hideModal() {
 		imageElem.src = '';
-		textDom.innerHTML
+		textDom.innerHTML;
 		addClasses(textElem, 'hide');
 		addClasses(imageElem, 'hide');
 		addClasses(container, 'hide');
@@ -170,22 +196,16 @@ var contentOverlay = (function() {
 	// main dom, unique for all the file types
 	container = createDom({
 		'type': 'div',
-		'attributes': {
-			'id': 'overlay',
-			'class': 'hide',
-		},
+		'id': 'overlay',
+		'class': 'hide',
 		'content': [
 			content = createDom({
 				'type': 'div',
-				'attributes': {
-					'class': 'content'
-				}
+				'class': 'content'
 			}),
 			createDom({
 				'type': 'button',
-				'attributes': {
-					'class': 'close'
-				}
+				'class': 'close'
 			})
 		],
 		'events': {
@@ -198,11 +218,9 @@ var contentOverlay = (function() {
 
 	var imageElem = createDom({
 		'type': 'img',
-		'attributes': {
-			'class': 'photo hide'
-				/*,
-				'src': i.url*/
-		}
+		'class': 'photo hide'
+			/*,
+			'src': i.url*/
 	});
 	content.appendChild(imageElem);
 
@@ -213,16 +231,12 @@ var contentOverlay = (function() {
 
 	var titleDom = createDom({
 		'type': 'p',
-		'attributes': {
-			'class': 'title'
-		}
+		'class': 'title'
 	});
 
 	var textElem = createDom({
 		'type': 'div',
-		'attributes': {
-			'class': 'text hide'
-		},
+		'class': 'text hide',
 		'events': {
 			'click': function(e) {
 				e.stopPropagation();
