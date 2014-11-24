@@ -581,9 +581,11 @@ body .content {
 .dirList {
   color: #fff;
   margin: 40px;
+  line-height: 30px;
+  font-family: 'Abel';
+  font-size: 18px;
 }
 .dirList li {
-  line-height: 30px;
   padding: 0 20px;
   list-style-type: none;
 }
@@ -592,6 +594,13 @@ body .content {
 }
 .dirList li:nth-child(odd) {
   background: #303a44;
+}
+@media screen and (max-width: 768px) {
+  .dirList {
+    margin: 0;
+    line-height: 50px;
+    background-color: white;
+  }
 }
 #overlay {
   position: fixed;

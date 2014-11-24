@@ -163,6 +163,8 @@ function createItemDom(i) {
 		draw();
 	}
 
+	// draw();
+
 	return item;
 }
 
