@@ -164,6 +164,8 @@ var audioPlayer = (function() {
 		audioName.innerHTML = obj.name;
 
 		audioEvents();
+		pinEvents();
+		trackerEvents();
 	};
 
 	function audioEvents() {
@@ -171,13 +173,51 @@ var audioPlayer = (function() {
 			var percentage = audio.currentTime * 100 / audio.duration;
 			audioProgress.style.width = percentage + '%';
 			audioPin.style.left = percentage + '%';
-		});
+		}, false);
 
-		audioPin.addEventListener('onmousemove', function(e) {
-			console.log(e);
-		});
+	};
+
+	function trackerEvents() {
+		audioTracker.addEventListener('click', function(e) {
+			e.stopPropagation();
+			var offsetX = e.offsetX,
+				width = e.currentTarget.offsetWidth,
+				percentage = offsetX * 100 / width;
+			audio.currentTime = audio.duration * percentage / 100;
+
+		}, false);
+	};
+
+	function pinEvents() {
+		var width = audioTracker.offsetWidth,
+			percentage = 0,
+			selected = null;
+
+		audioPin.addEventListener('mousedown', function(e) {
+			e.stopPropagation();
+			selected = audioPin;
+		}, false);
+
+		audioTracker.addEventListener('mousemove', function(e) {
+			e.stopPropagation();
+			setTimeout(function() {
+				percentage = e.offsetX * 100 / width;
+				if (selected !== null) {
+					audio.currentTime = audio.duration * percentage / 100;
+				}
+			}, 100);
+
+		}, false);
+
+		audioTracker.addEventListener('mouseup', function(e) {
+			e.stopPropagation();
+			percentage = e.offsetX * 100 / width;
+			if (selected !== null) {
+				audio.currentTime = audio.duration * percentage / 100;
+			}
+			selected = null;
+		}, false);
 	}
-
 
 
 	return singleton;
