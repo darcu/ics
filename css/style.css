@@ -169,7 +169,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  background-color: #101a24;
+  background-color: #2a6eb1;
   -webkit-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
@@ -179,6 +179,9 @@ html .content,
 body .content {
   width: 1550px;
   margin: 0 auto;
+}
+.hide {
+  display: none;
 }
 /* Media queries */
 @media screen and (max-width: 1600px) {
@@ -312,6 +315,60 @@ body .content {
 }
 .icon-close:before {
   content: "\e61a";
+}
+header {
+  background-color: #091826;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  z-index: 2;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4);
+}
+header button {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  margin: 0;
+  border: none;
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  background-color: #091826;
+  cursor: pointer;
+  -webkit-transition: border 0.25s ease;
+}
+header button:hover {
+  color: #2a6eb1;
+  background-color: white;
+}
+header button:focus {
+  outline: none;
+}
+.dirList {
+  color: #fff;
+  margin: 40px;
+  line-height: 30px;
+  font-family: 'Abel';
+  font-size: 18px;
+}
+.dirList li {
+  padding: 0 20px;
+  list-style-type: none;
+  cursor: pointer;
+}
+.dirList li:nth-child(odd) {
+  background-color: #4a8ed1;
+}
+.dirList li:hover {
+  background-color: #153759;
+}
+@media screen and (max-width: 768px) {
+  .dirList {
+    margin: 0;
+    line-height: 50px;
+    background-color: white;
+  }
 }
 .grid {
   list-style: none;
@@ -576,30 +633,6 @@ body .content {
   }
   .grid .item .box .downloadButton:before {
     font-size: 70px;
-  }
-}
-.dirList {
-  color: #fff;
-  margin: 40px;
-  line-height: 30px;
-  font-family: 'Abel';
-  font-size: 18px;
-}
-.dirList li {
-  padding: 0 20px;
-  list-style-type: none;
-}
-.dirList li:nth-child(even) {
-  background: #202a34;
-}
-.dirList li:nth-child(odd) {
-  background: #303a44;
-}
-@media screen and (max-width: 768px) {
-  .dirList {
-    margin: 0;
-    line-height: 50px;
-    background-color: white;
   }
 }
 #overlay {

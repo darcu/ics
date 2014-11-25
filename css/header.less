@@ -1,0 +1,39 @@
+header {
+	background-color: @black-blue;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 30px;
+	z-index: 2;
+	box-shadow: @box-shadow;
+
+	button {
+		position: absolute;
+		right: 0;
+		height: 100%;
+
+		margin: 0;
+
+
+		border: none;
+		// border-radius: 2px;
+		
+
+		font-family: 'Open Sans', sans-serif;
+		// font-size: 18px;
+		// font-weight: bold;
+		color: white;
+		background-color: @black-blue;
+		cursor: pointer;
+
+		-webkit-transition: border 0.25s ease;
+		&:hover {
+			color: @bg-blue;
+			background-color: white;
+		}
+		&:focus {
+			outline: none;
+		}
+	}
+}

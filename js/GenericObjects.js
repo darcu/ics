@@ -17,3 +17,8 @@ var Item = function(meta, type) {
 			break;
 	}
 };
+
+var User = function(info) {
+	delete info._json;
+	User = info;
+};

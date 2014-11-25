@@ -58,27 +58,46 @@ var boxes = (function() {
 	return boxes;
 }());
 
+
+function ini() {
+	dropthebox();
+}
+
 function dropthebox() {
 	var dbClient = new Dropbox.Client({
 		key: '51rqcwrylm53i02'
 	});
-
-	dbClient.authenticate({}, function(error) {
-		error && showError(error);
-	});
-
 	boxes.dropbox = dbClient;
 
-	displayDir('/');
+	function getAccountInfo() {
+		displayDir('/');
+		dbClient.getAccountInfo({}, function(error, info) {
+			console.log('get acc info');
+
+			User(info);
+			Header.updateName(User.name);
+		});
+	}
 
 	function displayDir(rootPath) {
 		boxes.reset();
 
+		// clean up list
 		var rootElem = document.querySelector('.dirList');
 		var kids = rootElem.childNodes;
 		for (var i = 0, n = kids.length; i < n; i++) {
 			rootElem.removeChild(kids[i]);
 		}
+
+		// // clean up drop down
+		// var select = document.querySelector('select');
+		// kids = select.childNodes;
+		// for (i = 0, n = kids.length; i < n; i++) {
+		// 	console.log('kids');
+		// 	console.log(kids[i]);
+
+		// 	kids[i] && select.removeChild(kids[i]);
+		// }		
 
 		dbClient.readdir(rootPath, {}, function(error, entryNames, rootData, entriesData) {
 			var listEntries = [];
@@ -104,6 +123,38 @@ function dropthebox() {
 			});
 		});
 	}
+
+	var login = function() {
+		console.log('login');
+		dbClient.authenticate({}, function(error) {
+			if (error) {
+				showError(error);
+				return;
+			}
+
+			getAccountInfo();
+		});
+		Header.setButtonCallback(logout);
+	}
+
+	var logout = function() {
+		console.log('logout');
+		dbClient.signOut({}, function(e) {
+			console.log('logged out');
+		});
+		document.location.reload();
+	}
+
+	Header.showButton();
+
+	if (dbClient.isAuthenticated()) {
+		console.log('is auth');
+		Header.setButtonCallback(logout);
+		getAccountInfo();
+	} else {
+		console.log('is not auth');
+		Header.setButtonCallback(login);
+	}
 }
 
-dropthebox();
+ini();

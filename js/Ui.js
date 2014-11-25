@@ -12,7 +12,52 @@
 /* global urlFromFile */
 /* global showError */
 
+
+var Header = (function() {
+	var obj = {};
+	obj.dom = document.querySelector('header');
+	obj.button = obj.dom.querySelector('button');
+
+	obj.showButton = function() {
+		removeClasses(this.button, 'hide');
+	};
+	obj.updateName = function(name) {
+		this.button.value = 'logout';
+		this.button.innerHTML = 'Logout ' + name;
+	}
+
+	obj.setButtonCallback = function(callback) {
+		this.button.onclick = callback;
+	};
+
+	return obj;
+}());
+
+function dropDown(parentElem, dirs, callback) {
+	!parentElem && (parentElem = document.querySelector('select'));
+
+	parentElem.onchange = function(e) {
+		callback(this.selectedIndex - 1);
+	};
+
+	parentElem.appendChild(createDom({
+		'type': 'option',
+		'value': -1,
+		'selected': 'selected',
+		'content': '..'
+	}));
+
+	dirs.forEach(function(dir, i) {
+		parentElem.appendChild(createDom({
+			'type': 'option',
+			'value': dir.name,
+			'content': dir.name
+		}));
+	});
+}
+
 function rootChooserDom(parentElem, dirs, callback) {
+	// dropDown(parentElem, dirs, callback);
 	!parentElem && (parentElem = document.querySelector('.dirList'));
 
 	var list = createDom({
@@ -29,7 +74,6 @@ function rootChooserDom(parentElem, dirs, callback) {
 		})
 	});
 
-	// for (var i = 0, n = dirNames.length; i < n; i++) {
 	dirs.forEach(function(dir, i) {
 		list.appendChild(createDom({
 			'type': 'li',
