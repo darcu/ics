@@ -1,0 +1,62 @@
+.mp3Player{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+
+	width: 100%;
+	height: 70px;
+
+	background-color: @music-color;
+	font-family: 'Open Sans Condensed', sans-serif;
+	.coverImage{
+		position: relative;
+		
+		width: 70px;
+		height: 100%;
+
+		float: left;
+	}
+	.controls{
+		position: relative;
+
+		width: 200px;
+		height: 100%;
+
+		float: left;
+
+		background-color: rgba(0, 0, 0, 0.175);
+		.play, .prev, .next{
+			height: 100%;
+			float: left;
+			cursor: pointer;
+		}
+		.prev, .next{
+			width: 30%;
+			background-color: #000;
+		}
+		.play{
+			width: 40%;
+			background-color: #ff0000;
+		}
+	}
+	.details{
+		position: relative;
+		height: 100%;
+		
+		float: left;
+		background-color: rgba(0, 0, 0, 0.15);
+		.calc(width, ~'100% - 270px');
+		.name{
+			padding: 0 0 0 15px;
+			font-size: 30px;
+			line-height: 70px;
+			color: #fff;
+		}
+		.time{
+
+		}
+		.tracker{
+
+		}
+	}
+}
