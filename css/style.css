@@ -416,15 +416,9 @@ body .content {
 .grid .item .box.download.pdf {
   background-color: #c11e07;
 }
-<<<<<<< HEAD
 .grid .item .box.download.pdf .downloadButton:before {
   content: '\e607';
-=======
-.grid .item .box.music {
-  background-color: #44b034;
->>>>>>> putin stil pentru mp3 boxes
 }
-<<<<<<< HEAD
 .grid .item .box.download.archive {
   background-color: #9d49a1;
 }
@@ -440,11 +434,9 @@ body .content {
 .grid .item .box.video {
   background-color: #ffd01e;
 }
-.grid .item .box.mp3 {
-  background-color: #42ff27;
+.grid .item .box.music {
+  background-color: #44b034;
 }
-=======
->>>>>>> inceput stil pentru mp3Player
 .grid .item .box.music .play,
 .grid .item .box.music .pause {
   position: absolute;
@@ -584,38 +576,6 @@ body .content {
   border-radius: 15px;
   background-clip: padding-box;
 }
-<<<<<<< HEAD
-=======
-.grid .item.selected {
-  width: 100%;
-  height: auto;
-  max-height: 100vh;
-  padding: 15px;
-  background-color: #393939;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
-.grid .item.selected .box .overlay {
-  display: none;
-}
-.grid .item.selected .box.photo {
-  margin: 0 auto;
-}
-.grid .item.selected .box.photo img {
-  max-width: 100%;
-  max-height: 100%;
-}
-.grid .item.selected .box.photo .hor {
-  height: auto;
-  max-height: 95vh;
-}
-.grid .item.selected .box.photo .vert {
-  width: auto;
-  max-height: 90vh;
-}
->>>>>>> putin stil pentru mp3 boxes
 .grid .item:hover .overlay {
   zoom: 1;
   filter: alpha(opacity=100);
@@ -646,7 +606,6 @@ body .content {
     padding: 2px;
   }
 }
-<<<<<<< HEAD
 @media screen and (max-width: 480px) {
   .grid .item .box .details .title {
     padding: 0 0 10px 0;
@@ -663,7 +622,7 @@ body .content {
   .grid .item .box .downloadButton:before {
     font-size: 70px;
   }
-=======
+}
 .mp3Player {
   position: fixed;
   bottom: 0;
@@ -706,20 +665,12 @@ body .content {
   position: relative;
   height: 100%;
   float: left;
-<<<<<<< HEAD
-  background-color: rgba(0, 0, 0, 0.5);
-<<<<<<< HEAD
->>>>>>> inceput stil pentru mp3Player
-=======
-=======
   background-color: rgba(0, 0, 0, 0.15);
->>>>>>> mp3 player
   -lh-property: 0;
 width:-webkit-calc(100% - 270px);
 width:-moz-calc(100% - 270px);
 width:calc(100% - 270px);
 ;
->>>>>>> stil de test pentru mp3player
 }
 .mp3Player .details .name {
   padding: 0 0 0 15px;
