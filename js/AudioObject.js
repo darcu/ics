@@ -8,6 +8,8 @@ var audioPlayer = (function() {
 		audioCoverImage,
 		audioTime,
 		audioTracker,
+		audioProgress,
+		audioPin,
 		audioDom = createDom({
 			'type': 'div',
 			'attributes': {
@@ -78,7 +80,21 @@ var audioPlayer = (function() {
 							'type': 'div',
 							'attributes': {
 								'class': 'tracker'
-							}
+							},
+							'content': [
+								audioProgress = createDom({
+									'type': 'div',
+									'attributes': {
+										'class': 'progress'
+									}
+								}),
+								audioPin = createDom({
+									'type': 'div',
+									'attributes': {
+										'class': 'pin'
+									}
+								})
+							]
 						})
 					]
 				})
@@ -151,7 +167,15 @@ var audioPlayer = (function() {
 	};
 
 	function audioEvents() {
+		audio.addEventListener('timeupdate', function(e) {
+			var percentage = audio.currentTime * 100 / audio.duration;
+			audioProgress.style.width = percentage + '%';
+			audioPin.style.left = percentage + '%';
+		});
 
+		audioPin.addEventListener('onmousemove', function(e) {
+			console.log(e);
+		});
 	}
 
 
