@@ -1,7 +1,11 @@
+/* global createDom */
+/* global console */
+
 var audioPlayer = (function() {
 	var singleton = {},
 		tracks = {},
 		currentTrack = '',
+		currentElement = '',
 		audio = new Audio();
 
 	var audioName,
@@ -109,7 +113,12 @@ var audioPlayer = (function() {
 
 	//for now we use the name instead of ID (to replace).
 	singleton.playTrack = function(id) {
+
+		//TODO @Stefan replace when we'll have an ID
+		currentElement = document.querySelector('[data-id=' + currentTrack.replace(/[0-9]/g, '').replace(' ', '') + ']');
+		console.log(currentElement);
 		if (id !== currentTrack) {
+			
 			currentTrack = id;
 			audio.src = tracks[id]['url'];
 			audio.play();
@@ -128,14 +137,14 @@ var audioPlayer = (function() {
 
 	//play the next track in list. If last, play the first one.
 	singleton.nextTrack = function() {
-		var nextTrackID = nextTrack(tracks, currentTrack).name;
+		var nextTrackID = getNextTrack(tracks, currentTrack).name;
 		singleton.playTrack(nextTrackID);
 		currentTrack = nextTrackID;
 	};
 
 	//play the previous track in list. If first, play the last one.
 	singleton.prevTrack = function() {
-		var prevTrackID = prevTrack(tracks, currentTrack).name;
+		var prevTrackID = getPrevTrack(tracks, currentTrack).name;
 		singleton.playTrack(prevTrackID);
 		currentTrack = prevTrackID;
 	};
@@ -145,14 +154,14 @@ var audioPlayer = (function() {
 	};
 
 	//get next element in object
-	function nextTrack(obj, key) {
+	function getNextTrack(obj, key) {
 		var keys = Object.keys(obj),
 			i = keys.indexOf(key);
 		return (i !== -1 && keys[i + 1]) ? obj[keys[i + 1]] : obj[keys[0]];
 	};
 
 	//get next element in object
-	function prevTrack(obj, key) {
+	function getPrevTrack(obj, key) {
 		var keys = Object.keys(obj),
 			i = keys.indexOf(key);
 		return (i !== -1 && keys[i - 1]) ? obj[keys[i - 1]] : obj[keys[keys.length - 1]];

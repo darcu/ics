@@ -78,7 +78,8 @@ function createItemDom(i) {
 				musicDom = createDom({
 					'type': 'div',
 					'attributes': {
-						'class': 'box music'
+						'class': 'box music',
+						'data-id': i.name.replace(/[0-9]/g, '').replace(' ', '')
 					},
 					'content': [
 						createDom({
