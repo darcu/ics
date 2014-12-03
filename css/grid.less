@@ -161,12 +161,23 @@
 				}
 				.pause{
 					display: none;
+					&:before{
+						content: '\e601';
+					}
 				}
 				.next{
 					display: none;
 				}
 				.prev{
 					display: none;
+				}
+				&.playing{
+					.play{
+						display: none;
+					}
+					.pause{
+						display: block;
+					}
 				}
 			}
 			&.text{
