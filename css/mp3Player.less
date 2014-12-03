@@ -1,6 +1,6 @@
 .mp3Player{
 	position: fixed;
-	bottom: 0;
+	bottom: -100%;
 	left: 0;
 
 	width: 100%;
@@ -8,6 +8,8 @@
 
 	background-color: @music-player-color;
 	font-family: 'Open Sans Condensed', sans-serif;
+
+	.transition(bottom 0.5s linear);
 	.coverImage{
 		position: relative;
 		
@@ -130,6 +132,7 @@
 	}
 	// when music its on we replace play button with pause button 
 	&.playing{
+		bottom: 0;
 		.controls{
 			.play{
 				display: none;
