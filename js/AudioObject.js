@@ -115,10 +115,11 @@ var audioPlayer = (function() {
 
 	//for now we use the name instead of ID (to replace).
 	singleton.playTrack = function(id) {
+		addClasses(musicDom, 'playing');
 		if (id !== currentTrackID) {
 			//TODO @Stefan replace when we'll have an ID
 			currentElement = document.querySelector('[data-id=' + (currentTrackID || id).replace(/[0-9]/g, '').replace(' ', '') + ']');
-			removeClasses(currentElement, 'playing');			
+			removeClasses(currentElement, 'playing');
 			currentTrackID = id;
 			audio.src = tracks[id]['url'];
 			audio.play();
@@ -127,7 +128,7 @@ var audioPlayer = (function() {
 			currentTrackID = id;
 			audio.play();
 		}
-		
+
 		currentElement = document.querySelector('[data-id=' + id.replace(/[0-9]/g, '').replace(' ', '') + ']');
 		addClasses(currentElement, 'playing');
 		return audio;
@@ -135,6 +136,7 @@ var audioPlayer = (function() {
 
 	//for now we use the name instead of ID (to replace).
 	singleton.pauseTrack = function() {
+		removeClasses(musicDom, 'playing');
 		audio.pause();
 	};
 
