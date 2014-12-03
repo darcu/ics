@@ -97,26 +97,26 @@ var audioPlayer = (function() {
 							'attributes': {
 								'class': 'time'
 							}
-						}),
-						audioTracker = createDom({
+						})
+					]
+				}),
+				audioTracker = createDom({
+					'type': 'div',
+					'attributes': {
+						'class': 'tracker'
+					},
+					'content': [
+						audioProgress = createDom({
 							'type': 'div',
 							'attributes': {
-								'class': 'tracker'
-							},
-							'content': [
-								audioProgress = createDom({
-									'type': 'div',
-									'attributes': {
-										'class': 'progress'
-									}
-								}),
-								audioPin = createDom({
-									'type': 'div',
-									'attributes': {
-										'class': 'pin'
-									}
-								})
-							]
+								'class': 'progress'
+							}
+						}),
+						audioPin = createDom({
+							'type': 'div',
+							'attributes': {
+								'class': 'pin'
+							}
 						})
 					]
 				})
