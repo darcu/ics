@@ -655,6 +655,7 @@ body .content {
   background-color: rgba(0, 0, 0, 0.175);
 }
 .mp3Player .controls .play,
+.mp3Player .controls .pause,
 .mp3Player .controls .prev,
 .mp3Player .controls .next {
   position: relative;
@@ -663,6 +664,7 @@ body .content {
   cursor: pointer;
 }
 .mp3Player .controls .play:before,
+.mp3Player .controls .pause:before,
 .mp3Player .controls .prev:before,
 .mp3Player .controls .next:before {
   content: '';
@@ -694,6 +696,13 @@ body .content {
 .mp3Player .controls .play:before {
   content: '\e600';
 }
+.mp3Player .controls .pause {
+  display: none;
+  width: 40%;
+}
+.mp3Player .controls .pause:before {
+  content: '\e600';
+}
 .mp3Player .details {
   float: left;
   position: relative;
@@ -711,22 +720,30 @@ width:calc(100% - 270px);
   font-size: 30px;
   line-height: 70px;
   color: #fff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
-.mp3Player .details .tracker {
+.mp3Player .tracker {
   position: absolute;
   top: 0;
-  height: 3px;
+  height: 4px;
   width: 100%;
   background-color: #5677FC;
   z-index: 0;
+  cursor: pointer;
+  -webkit-transition: height 0.25s linear;
+  -moz-transition: height 0.25s linear;
+  -o-transition: height 0.25s linear;
+  transition: height 0.25s linear;
 }
-.mp3Player .details .tracker .progress {
+.mp3Player .tracker .progress {
   position: absolute;
   height: 100%;
   background-color: #0b3bfb;
   z-index: 1;
 }
-.mp3Player .details .tracker .pin {
+.mp3Player .tracker .pin {
   display: none;
   position: absolute;
   top: -5px;
@@ -739,8 +756,51 @@ width:calc(100% - 270px);
   -moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
 }
-.mp3Player.playing .controls .play:before {
+.mp3Player .tracker:hover {
+  height: 8px;
+}
+.mp3Player.playing .controls .play {
+  display: none;
+}
+.mp3Player.playing .controls .pause {
+  display: block;
+}
+.mp3Player.playing .controls .pause:before {
   content: '\e601';
+}
+@media screen and (max-width: 768px) {
+  .mp3Player {
+    height: 100px;
+  }
+  .mp3Player .coverImage {
+    display: none;
+  }
+  .mp3Player .controls {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    height: 50px;
+  }
+  .mp3Player .controls .play:before,
+  .mp3Player .controls .pause:before,
+  .mp3Player .controls .prev:before,
+  .mp3Player .controls .next:before {
+    font-size: 30px;
+  }
+  .mp3Player .details {
+    width: 100%;
+    height: 50px;
+    padding: 0 10px;
+  }
+  .mp3Player .details .name {
+    line-height: 50px;
+    font-size: 22px;
+    padding: 0;
+  }
+  .mp3Player .tracker {
+    top: -4px;
+    height: 8px;
+  }
 }
 #overlay {
   position: fixed;
