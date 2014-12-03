@@ -95,6 +95,18 @@ function createItemDom(i) {
 							}
 						}),
 						createDom({
+							'type': 'button',
+							'attributes': {
+								'class': 'pause'
+							},
+							'events': {
+								'click': function(e) {
+									audioPlayer.pauseTrack();
+									return false;
+								}
+							}
+						}),
+						createDom({
 							'type': 'div',
 							'attributes': {
 								'class': 'details'

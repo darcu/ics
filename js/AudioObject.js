@@ -1,10 +1,12 @@
 /* global createDom */
 /* global console */
+/* global addClasses */
+/* global removeClasses */
 
 var audioPlayer = (function() {
 	var singleton = {},
 		tracks = {},
-		currentTrack = '',
+		currentTrackID = '',
 		currentElement = '',
 		audio = new Audio();
 
@@ -113,20 +115,21 @@ var audioPlayer = (function() {
 
 	//for now we use the name instead of ID (to replace).
 	singleton.playTrack = function(id) {
-
-		//TODO @Stefan replace when we'll have an ID
-		currentElement = document.querySelector('[data-id=' + currentTrack.replace(/[0-9]/g, '').replace(' ', '') + ']');
-		console.log(currentElement);
-		if (id !== currentTrack) {
-			
-			currentTrack = id;
+		if (id !== currentTrackID) {
+			//TODO @Stefan replace when we'll have an ID
+			currentElement = document.querySelector('[data-id=' + (currentTrackID || id).replace(/[0-9]/g, '').replace(' ', '') + ']');
+			removeClasses(currentElement, 'playing');			
+			currentTrackID = id;
 			audio.src = tracks[id]['url'];
 			audio.play();
 			populateDom(tracks[id]);
 		} else {
-			currentTrack = id;
+			currentTrackID = id;
 			audio.play();
 		}
+		
+		currentElement = document.querySelector('[data-id=' + id.replace(/[0-9]/g, '').replace(' ', '') + ']');
+		addClasses(currentElement, 'playing');
 		return audio;
 	};
 
@@ -137,16 +140,16 @@ var audioPlayer = (function() {
 
 	//play the next track in list. If last, play the first one.
 	singleton.nextTrack = function() {
-		var nextTrackID = getNextTrack(tracks, currentTrack).name;
+		var nextTrackID = getNextTrack(tracks, currentTrackID).name;
 		singleton.playTrack(nextTrackID);
-		currentTrack = nextTrackID;
+		currentTrackID = nextTrackID;
 	};
 
 	//play the previous track in list. If first, play the last one.
 	singleton.prevTrack = function() {
-		var prevTrackID = getPrevTrack(tracks, currentTrack).name;
+		var prevTrackID = getPrevTrack(tracks, currentTrackID).name;
 		singleton.playTrack(prevTrackID);
-		currentTrack = prevTrackID;
+		currentTrackID = prevTrackID;
 	};
 
 	singleton.displayTracks = function() {
@@ -158,14 +161,14 @@ var audioPlayer = (function() {
 		var keys = Object.keys(obj),
 			i = keys.indexOf(key);
 		return (i !== -1 && keys[i + 1]) ? obj[keys[i + 1]] : obj[keys[0]];
-	};
+	}
 
 	//get next element in object
 	function getPrevTrack(obj, key) {
 		var keys = Object.keys(obj),
 			i = keys.indexOf(key);
 		return (i !== -1 && keys[i - 1]) ? obj[keys[i - 1]] : obj[keys[keys.length - 1]];
-	};
+	}
 
 	function populateDom(obj) {
 		//audioCoverImage cand o fi
@@ -175,16 +178,16 @@ var audioPlayer = (function() {
 		audioEvents();
 		pinEvents();
 		trackerEvents();
-	};
+	}
 
 	function audioEvents() {
-		audio.addEventListener('timeupdate', function(e) {
+		audio.addEventListener('timeupdate', function() {
 			var percentage = audio.currentTime * 100 / audio.duration;
 			audioProgress.style.width = percentage + '%';
 			audioPin.style.left = percentage + '%';
 		}, false);
 
-	};
+	}
 
 	function trackerEvents() {
 		audioTracker.addEventListener('click', function(e) {
@@ -195,7 +198,7 @@ var audioPlayer = (function() {
 			audio.currentTime = audio.duration * percentage / 100;
 
 		}, false);
-	};
+	}
 
 	function pinEvents() {
 		var width = audioTracker.offsetWidth,
