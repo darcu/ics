@@ -49,6 +49,22 @@ var audioPlayer = (function() {
 							'type': 'div',
 							'attributes': {
 								'class': 'play'
+							},
+							'events': {
+								'click': function() {
+									singleton.playTrack(currentTrackID);
+								}
+							}
+						}),
+						createDom({
+							'type': 'div',
+							'attributes': {
+								'class': 'pause'
+							},
+							'events': {
+								'click': function() {
+									singleton.pauseTrack();
+								}
 							}
 						}),
 						createDom({
