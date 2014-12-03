@@ -152,6 +152,8 @@ var audioPlayer = (function() {
 
 	//for now we use the name instead of ID (to replace).
 	singleton.pauseTrack = function() {
+		currentElement = document.querySelector('[data-id=' + (currentTrackID || id).replace(/[0-9]/g, '').replace(' ', '') + ']');
+		removeClasses(currentElement, 'playing');
 		removeClasses(audioDom, 'playing');
 		audio.pause();
 	};
