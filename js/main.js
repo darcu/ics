@@ -31,6 +31,8 @@ var boxes = (function() {
 }());
 
 var URLS = [
+	'./_resources/Mercy.mp3',
+	'./_resources/05 Retrograde.mp3',
 	'./_resources/mongoose-free-5.4.1.exe',
 	'./_resources/03.png',
 	'./_resources/6.jpg',
@@ -70,7 +72,6 @@ var URLS = [
 	'./_resources/16.jpg',
 	'./_resources/Dream_01_by_pr09studio.png',
 	'./_resources/01-50-21-meh.ro11741.jpg',
-	'./_resources/05 Retrograde.mp3',
 	'./_resources/11.jpg',
 	'./_resources/15.jpg',
 	'./_resources/Best-top-desktop-abstract-pattern-wallpapers-hd-wallpaper-pattern-pictures-and-images-1.jpeg',

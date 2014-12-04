@@ -69,6 +69,62 @@ function createItemDom(i) {
 				item.appendChild(textDom);
 			});
 			break;
+		case 'audio':
+			audioPlayer.addTrack(i);
+			var audio = null,
+				progress = 0,
+				state = 'start',
+				progressRadial = '',
+				musicDom = createDom({
+					'type': 'div',
+					'attributes': {
+						'class': 'box music',
+						'data-id': i.name.replace(/[0-9]/g, '').replace(' ', '')
+					},
+					'content': [
+						createDom({
+							'type': 'button',
+							'attributes': {
+								'class': 'play'
+							},
+							'events': {
+								'click': function(e) {
+									audioPlayer.playTrack(i.name);
+									return false;
+								}
+							}
+						}),
+						createDom({
+							'type': 'button',
+							'attributes': {
+								'class': 'pause'
+							},
+							'events': {
+								'click': function(e) {
+									audioPlayer.pauseTrack();
+									return false;
+								}
+							}
+						}),
+						createDom({
+							'type': 'div',
+							'attributes': {
+								'class': 'details'
+							},
+							'content': [
+								createDom({
+									'type': 'p',
+									'attributes': {
+										'class': 'title'
+									},
+									'content': i.name
+								})
+							]
+						})
+					]
+				});
+			item.appendChild(musicDom);
+			break;
 		default:
 			var extClass = i.mime || '',
 				downloadDom = createDom({

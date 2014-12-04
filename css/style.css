@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Abel);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700);
 /* 
 html5doctor.com Reset Stylesheet
 v1.6.1
@@ -175,6 +176,7 @@ body {
   -moz-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
+  font-family: 'Abel', sans-serif;
 }
 html .content,
 body .content {
@@ -432,8 +434,60 @@ body .content {
 .grid .item .box.video {
   background-color: #ffd01e;
 }
-.grid .item .box.mp3 {
-  background-color: #42ff27;
+.grid .item .box.music {
+  background-color: #44b034;
+}
+.grid .item .box.music .play,
+.grid .item .box.music .pause {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: 70px;
+  height: 70px;
+  background: transparent;
+  border: 0px solid transparent;
+  cursor: pointer;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.grid .item .box.music .play:before,
+.grid .item .box.music .pause:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'ics';
+  font-size: 70px;
+  color: #fff;
+}
+.grid .item .box.music .play {
+  display: block;
+}
+.grid .item .box.music .play:before {
+  content: '\e600';
+}
+.grid .item .box.music .pause {
+  display: none;
+}
+.grid .item .box.music .pause:before {
+  content: '\e601';
+}
+.grid .item .box.music .next {
+  display: none;
+}
+.grid .item .box.music .prev {
+  display: none;
+}
+.grid .item .box.music.playing .play {
+  display: none;
+}
+.grid .item .box.music.playing .pause {
+  display: block;
 }
 .grid .item .box.text {
   padding: 40px;
@@ -576,6 +630,183 @@ body .content {
   }
   .grid .item .box .downloadButton:before {
     font-size: 70px;
+  }
+}
+.mp3Player {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background-color: rgba(27, 27, 27, 0.94);
+  font-family: 'Open Sans Condensed', sans-serif;
+  -webkit-transition: bottom 0.5s linear;
+  -moz-transition: bottom 0.5s linear;
+  -o-transition: bottom 0.5s linear;
+  transition: bottom 0.5s linear;
+}
+.mp3Player .coverImage {
+  position: relative;
+  width: 70px;
+  height: 100%;
+  float: left;
+}
+.mp3Player .controls {
+  position: relative;
+  width: 200px;
+  height: 100%;
+  float: left;
+  background-color: rgba(0, 0, 0, 0.175);
+}
+.mp3Player .controls .play,
+.mp3Player .controls .pause,
+.mp3Player .controls .prev,
+.mp3Player .controls .next {
+  position: relative;
+  float: left;
+  height: 100%;
+  cursor: pointer;
+}
+.mp3Player .controls .play:before,
+.mp3Player .controls .pause:before,
+.mp3Player .controls .prev:before,
+.mp3Player .controls .next:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-family: 'ics';
+  font-size: 40px;
+  color: #fff;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.mp3Player .controls .prev,
+.mp3Player .controls .next {
+  width: 30%;
+}
+.mp3Player .controls .prev:before {
+  content: '\e603';
+}
+.mp3Player .controls .next:before {
+  content: '\e604';
+}
+.mp3Player .controls .play {
+  width: 40%;
+}
+.mp3Player .controls .play:before {
+  content: '\e600';
+}
+.mp3Player .controls .pause {
+  display: none;
+  width: 40%;
+}
+.mp3Player .controls .pause:before {
+  content: '\e600';
+}
+.mp3Player .details {
+  float: left;
+  position: relative;
+  height: 100%;
+  padding: 0 25px;
+  background-color: rgba(0, 0, 0, 0.15);
+  -lh-property: 0;
+width:-webkit-calc(100% - 270px);
+width:-moz-calc(100% - 270px);
+width:calc(100% - 270px);
+;
+}
+.mp3Player .details .name {
+  padding: 0 0 0 15px;
+  font-size: 30px;
+  line-height: 70px;
+  color: #fff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.mp3Player .tracker {
+  position: absolute;
+  top: 0;
+  height: 4px;
+  width: 100%;
+  background-color: #5677FC;
+  z-index: 0;
+  cursor: pointer;
+  -webkit-transition: height 0.25s linear;
+  -moz-transition: height 0.25s linear;
+  -o-transition: height 0.25s linear;
+  transition: height 0.25s linear;
+}
+.mp3Player .tracker .progress {
+  position: absolute;
+  height: 100%;
+  background-color: #0b3bfb;
+  z-index: 1;
+}
+.mp3Player .tracker .pin {
+  display: none;
+  position: absolute;
+  top: -5px;
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  z-index: 2;
+  -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+}
+.mp3Player .tracker:hover {
+  height: 8px;
+}
+.mp3Player.playing {
+  bottom: 0;
+}
+.mp3Player.playing .controls .play {
+  display: none;
+}
+.mp3Player.playing .controls .pause {
+  display: block;
+}
+.mp3Player.playing .controls .pause:before {
+  content: '\e601';
+}
+@media screen and (max-width: 640px) {
+  .mp3Player {
+    height: 100px;
+  }
+  .mp3Player .coverImage {
+    display: none;
+  }
+  .mp3Player .controls {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    height: 50px;
+  }
+  .mp3Player .controls .play:before,
+  .mp3Player .controls .pause:before,
+  .mp3Player .controls .prev:before,
+  .mp3Player .controls .next:before {
+    font-size: 30px;
+  }
+  .mp3Player .details {
+    width: 100%;
+    height: 50px;
+    padding: 0 10px;
+  }
+  .mp3Player .details .name {
+    line-height: 50px;
+    font-size: 22px;
+    padding: 0;
+  }
+  .mp3Player .tracker {
+    top: -4px;
+    height: 8px;
   }
 }
 #overlay {
