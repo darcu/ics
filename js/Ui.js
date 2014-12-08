@@ -182,7 +182,11 @@ var contentOverlay = (function() {
 
 	function hideModal(e) {
 		content.innerHTML = '';
-		addClasses(container, 'hide');
+		addClasses(container, 'fadding');
+		console.log('blabla');
+		setTimeout(function(){
+			addClasses(container, 'hide');
+		}, 250);
 	}
 
 	function showModal() {

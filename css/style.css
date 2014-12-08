@@ -171,7 +171,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  background-color: #101a24;
+  background-color: #ffffff;
   -webkit-transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
@@ -809,6 +809,46 @@ width:calc(100% - 270px);
     height: 8px;
   }
 }
+@-webkit-keyframes show {
+  0% {
+    transform: scale(3);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes show {
+  0% {
+    transform: scale(3);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fade {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+@keyframes fade {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
 #overlay {
   position: fixed;
   top: 0;
@@ -817,13 +857,17 @@ width:calc(100% - 270px);
   height: 100%;
   background-color: rgba(0, 0, 0, 0.85);
   overflow: hidden;
-  -webkit-animation: fall 0.4s linear;
-  -moz-animation: fall 0.4s linear;
-  -o-animation: fall 0.4s linear;
-  animation: fall 0.4s linear;
+  -webkit-animation: show 0.25s linear;
+  -moz-animation: show 0.25s linear;
+  -o-animation: show 0.25s linear;
+  animation: show 0.25s linear;
 }
 #overlay.hide {
   display: none;
+  -webkit-animation: fade 0.25s linear;
+  -moz-animation: fade 0.25s linear;
+  -o-animation: fade 0.25s linear;
+  animation: fade 0.25s linear;
 }
 #overlay .content {
   position: relative;

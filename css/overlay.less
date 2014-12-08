@@ -1,3 +1,27 @@
+// animation for overlay fadeIn
+
+@-webkit-keyframes show{
+	0% {
+		transform: scale(3);
+		opacity: 0;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+@keyframes show{
+	0% {
+		transform: scale(3);
+		opacity: 0;
+	}
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
 #overlay{
 	position: fixed;
 	top: 0;
@@ -8,9 +32,10 @@
 
 	background-color: rgba(0, 0, 0, 0.85);
 	overflow: hidden;
-	.animation(fall 0.4s linear);
+	.animation(show 0.25s linear);
 	&.hide{
 		display: none;
+		.animation(fade 0.25s linear);
 	}
 	.content{
 		position: relative;
