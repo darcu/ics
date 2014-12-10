@@ -211,8 +211,7 @@ body .content {
 /* IMPORTS */
 @font-face {
   font-family: 'ics';
-  src: url('fonts/ics.eot?-b4od5i');
-  src: url('fonts/ics.eot?#iefix-b4od5i') format('embedded-opentype'), url('fonts/ics.woff?-b4od5i') format('woff'), url('fonts/ics.ttf?-b4od5i') format('truetype'), url('fonts/ics.svg?-b4od5i#ics') format('svg');
+  src: url('fonts/ics.woff?-b4od5i') format('woff'), url('fonts/ics.ttf?-b4od5i') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
